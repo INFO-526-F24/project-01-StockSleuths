@@ -1,11 +1,11 @@
 ---
-title: "Proposal title"
+title: "The Impact of War on the Economies of Russia & Ukraine"
 subtitle: "Proposal"
 author: 
-  - name: "Team Name"
+  - name: "Stock Sleuths"
     affiliations:
       - name: "School of Information, University of Arizona"
-description: "Project description"
+description: "Our team is conducting a comprehensive analysis with the goal of identifying and analyzing trends in the financial markets of both Russia and Ukraine, as well as their allies. By examining these trends, we aim to gain valuable insights into how the ongoing conflict has influenced the economies of the two countries and their allies."
 format:
   html:
     code-tools: true
