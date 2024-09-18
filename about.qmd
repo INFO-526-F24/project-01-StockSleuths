@@ -6,10 +6,14 @@ editor: visual
 
 This project was developed by **\[Team Name\]** For [INFO 526 - Data Analysis and Visualization](https://datavizaz.org/) at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.
 
--   Team member 1: One sentence description of Team member 1 (e.g., year, major, etc.).
+-   Ravleen Kaur Chadha:
 
--   Team member 2: One sentence description of Team member 2 (e.g., year, major, etc.).
+-   Remi Hendershott: First year Master's student in Information Science with a sub-plan of Human-Centered Computing.
 
--   Team member 3: One sentence description of Team member 3 (e.g., year, major, etc.).
+-   Anudeep Appikatla:
 
--   Team member 4: One sentence description of Team member 4 (e.g., year, major, etc.).
+-   Connor Alubowicz:
+
+-   Neha Suresh Chaudhari:
+
+-   Aditya Bandimatt:
