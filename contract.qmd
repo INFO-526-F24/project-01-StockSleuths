@@ -2,7 +2,6 @@
 title: "Team Project Contract"
 format: html
 editor: visual
-date: 30 Sept,2024
 ---
 
 # Influence of Russia/Ukraine Conflict on US Economy
@@ -44,13 +43,19 @@ Our goal is to examine the effects of the Russia/Ukraine war on the U.S. economy
 
 ### Learning Objectives:
 
-1.  
+1.  Identify and select appropriate datasets to generate accurate and meaningful visualizations.
+
+2.  Select the most suitable plots or graphs for datasets to ensure clear and effective interpretation.
+
+3.  Create visually appealing plots that are accessible and inclusive for individuals with color vision deficiencies.
+
+4.  
 
 ## Team Roles and Responsibilities Roles:
 
 -   Project Manager: Remi Hendershott – Ensures timelines are met, organizes meetings, and manages communications.
 
--   Data Analyst: Anudeep Appikatla & Conner Alubowicz – Responsible for data cleaning, analysis, and exploratory visualizations.
+-   Data Analyst: Anudeep Appikatla & Connor Alubowicz – Responsible for data cleaning, analysis, and exploratory visualizations.
 
 -   Visualization Specialist: Ravleen Kaur Chadha & Neha Chaudhari – Designs the final visualizations and makes aesthetic choices.
 
