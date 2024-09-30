@@ -4,7 +4,7 @@ format: html
 editor: visual
 ---
 
-This project was developed by **Stock Sleuths** For [INFO 526 - Data Analysis and Visualization](https://datavizaz.org/) at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.
+This project was developed by **Stock Slayers** For [INFO 526 - Data Analysis and Visualization](https://datavizaz.org/) at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.
 
 -   Ravleen Kaur Chadha:
 
@@ -12,8 +12,8 @@ This project was developed by **Stock Sleuths** For [INFO 526 - Data Analysis an
 
 -   Anudeep Appikatla:
 
--   Connor Alubowicz:
+-   Conner Alubowicz: Accelerated Master's Student studying Industrial Engineering with a plan of getting into data science / ML, after graduation.
 
--   Neha Suresh Chaudhari: First year Master's in Data Science student.
+-   Neha Suresh Chaudhari: First year Master in Data Science student.
 
 -   Aditya Bandimatt: Second year Information Science Master's student with specialization in Machine Learning.
