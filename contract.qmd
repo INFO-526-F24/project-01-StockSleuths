@@ -24,7 +24,17 @@ Our goal is to examine the effects of the Russia/Ukraine war on the U.S. economy
 
 ### Expected Deliverables:
 
-\[List of specific outputs, such as final visualizations, reports, presentations, graphs\]
+-   Proposal
+
+-   Data Visualizations
+
+-   Data Analysis
+
+-   Project Presentation
+
+-   Final Documentation
+
+-   Peer Reviews
 
 ### Team Goals:
 
