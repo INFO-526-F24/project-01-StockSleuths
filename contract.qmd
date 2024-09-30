@@ -94,7 +94,18 @@ Decisions will be made by consensus; if a consensus cannot be reached, a vote wi
 
 ### Task Assignments:
 
-\[Use a table to assign tasks to team members with due dates.\]
+|                     | Task Description                                                              | Team Member | Due Date |
+|---------------------|-------------------------------------------------------------------------------|-------------|----------|
+| Acquiring Data Sets | Finding 3 data sets that meet project description.                            |             |          |
+| Clean Data          | Remove/Replace NULL values. Normalize as needed. Change datatypes as needed.  |             |          |
+| Questions           | Decide on 2 project questions.                                                |             |          |
+| Project Proposal    |                                                                               |             |          |
+| Peer Review         |                                                                               |             |          |
+| Data Mutation       |                                                                               |             |          |
+| Data Visualizations |                                                                               |             |          |
+| Write up            |                                                                               |             |          |
+| Presentation        |                                                                               |             |          |
+| Peer Review         |                                                                               |             |          |
 
 ## Accountability and Expectations Attendance Policy:
 
