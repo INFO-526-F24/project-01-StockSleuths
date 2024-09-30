@@ -19,9 +19,9 @@ editor: visual
 
 ## Project Overview:
 
-Our goal is to examine the effects of the Russia/Ukraine war on the U.S. economy, with a specific focus on oil prices and stock market trends from the start of the conflict (February 2022 to the present). We selected these datasets and this topic because several team members are particularly interested in applying data science within the financial sector. We believe that analyzing the war's influence on the U.S. economy, particularly on stocks and oil prices, will provide valuable insights. Our team also agreed that exploring this relationship offers a creative and meaningful opportunity to enhance our data visualization skills.
+Our goal is to examine the effects of the Russia/Ukraine war on the U.S. economy, with a specific focus on oil prices and stock market trends from the start of the conflict (February 2022 to the present). We selected these data sets and this topic because several team members are particularly interested in applying data science within the financial sector. We believe that analyzing the war's influence on the U.S. economy, particularly on stocks and oil prices, will provide valuable insights. Our team also agreed that exploring this relationship offers a creative and meaningful opportunity to enhance our data visualization skills.
 
-### Expected Deliverables:
+### Expected Deliveribles:
 
 \[List of specific outputs, such as final visualizations, reports, presentations.\]
 
