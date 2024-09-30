@@ -43,21 +43,16 @@ Our goal is to examine the effects of the Russia/Ukraine war on the U.S. economy
 
 ### Learning Objectives:
 
-<<<<<<< HEAD
-1.  Identify and select appropriate datasets to generate accurate and meaningful visualizations.
+1. Identify and select appropriate datasets to generate accurate and meaningful visualizations.
 
-2.  Select the most suitable plots or graphs for datasets to ensure clear and effective interpretation.
+2. Select the most suitable plots or graphs for datasets to ensure clear and effective interpretation.
 
-3.  Create visually appealing plots that are accessible and inclusive for individuals with color vision deficiencies.
+3. Create visually appealing plots that are accessible and inclusive for individuals with color vision deficiencies.
 
-4.  
-=======
-1.  Research and understand the domain - Russia & Ukrain war and its impact on US economy
+4. Interpret relationships between geopolitical events and market performance.
 
-2.  Relevant data gathering and data analysis to meet the set objectives
+5. Analyze the war’s impact on U.S. oil prices and stock trends.
 
-3.  Build relevant plots and visualizations in R and Quarto
->>>>>>> 2253437615b406166d4bf089da3bf15a483801bc
 
 ## Team Roles and Responsibilities Roles:
 
