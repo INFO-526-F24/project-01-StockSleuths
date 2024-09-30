@@ -16,4 +16,4 @@ This project was developed by **\[Team Name\]** For [INFO 526 - Data Analysis an
 
 -   Neha Suresh Chaudhari:
 
--   Aditya Bandimatt:
+-   Aditya Bandimatt: Second year Information Science Master's student with specialization in Machine Learning.
