@@ -24,7 +24,21 @@ Our goal is to examine the effects of the Russia/Ukraine war on the U.S. economy
 
 ### Expected Deliverables:
 
+<<<<<<< HEAD
 \[List of specific outputs, such as final visualizations, reports, presentations.\]
+=======
+-   Proposal
+
+-   Data Visualizations
+
+-   Data Analysis
+
+-   Project Presentation
+
+-   Final Documentation
+
+-   Peer Reviews
+>>>>>>> 8d90e79e46558160d17709a351fd2d80ffe150f2
 
 ### Team Goals:
 
@@ -40,7 +54,7 @@ Our goal is to examine the effects of the Russia/Ukraine war on the U.S. economy
 
 -   Project Manager: Remi Hendershott – Ensures timelines are met, organizes meetings, and manages communications.
 
--   Data Analyst: Anudeep Appikatla & Connor Alubowicz – Responsible for data cleaning, analysis, and exploratory visualizations.
+-   Data Analyst: Anudeep Appikatla & Conner Alubowicz – Responsible for data cleaning, analysis, and exploratory visualizations.
 
 -   Visualization Specialist: Ravleen Kaur Chadha & Neha Chaudhari – Designs the final visualizations and makes aesthetic choices.
 
