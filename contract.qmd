@@ -1,0 +1,108 @@
+---
+title: "Team Project Contract"
+format: html
+editor: visual
+---
+
+# Influence of Russia/Ukraine Conflict on US Economy
+
+## Team Members:
+
+|                          |                               |
+|--------------------------|-------------------------------|
+| Remi Hendershott         | emoryh\@arizona.edu           |
+| Ravleen Kaur Chadha      | ravleenchadha\@arizona.edu    |
+| Neha Chaudhari           | nehaschaudhari02\@arizona.edu |
+| Anudeep Appikatla        | anudeepappikatla\@arizona.edu |
+| Connor Alubowicz         | calubowicz\@arizona.edu       |
+| Aditya Bandimatt Nagaraj | bandimatt\@arizona.edu        |
+
+## Project Overview:
+
+Our goal is to examine the effects of the Russia/Ukraine war on the U.S. economy, with a specific focus on oil prices and stock market trends from the start of the conflict (February 2022 to the present). We selected these datasets and this topic because several team members are particularly interested in applying data science within the financial sector. We believe that analyzing the war's influence on the U.S. economy, particularly on stocks and oil prices, will provide valuable insights. Our team also agreed that exploring this relationship offers a creative and meaningful opportunity to enhance our data visualization skills.
+
+### Expected Deliverables:
+
+\[List of specific outputs, such as final visualizations, reports, presentations.\]
+
+### Team Goals:
+
+-   To gain valuable insights on the impact of conflict on the US economy via data analysis and visualizations
+
+-   To successfully create plots to display the conclusions of our data analysis
+
+### Learning Objectives:
+
+1.  
+
+## Team Roles and Responsibilities Roles:
+
+-   Project Manager: Remi Hendershott – Ensures timelines are met, organizes meetings, and manages communications.
+
+-   Data Analyst: Anudeep Appikatla & Connor Alubowicz – Responsible for data cleaning, analysis, and exploratory visualizations.
+
+-   Visualization Specialist: Ravleen Kaur Chadha & Neha Chaudhari – Designs the final visualizations and makes aesthetic choices.
+
+-   Documentation Lead: Aditya Bandimatt Nagaraj – Keeps detailed notes, ensures all project decisions are documented, and handles the final report.
+
+### Responsibilities:
+
+General Responsibilities each team member is responsible for:
+
+-   Participating actively in all meetings.
+
+-   Completing their assigned tasks on time.
+
+-   Communicating openly and promptly if issues arise.
+
+### Meeting Schedule:
+
+Bi-weekly check-ins on Mondays/Wednesdays via Slack, e-mail, or in class.
+
+### Primary Communication Platform:
+
+Slack or e-mail.
+
+### Decision-Making Process:
+
+Decisions will be made by consensus; if a consensus cannot be reached, a vote will be taken.
+
+## Work Plan and Timeline Milestones:
+
+-   Data Collection and Cleaning: Completed by Oct. 16th, 2024.
+
+-   Exploratory Data Analysis: Completed by Nov. 13th, 2024.
+
+-   Design of Visualizations: Completed by Nov. 13th, 2024.
+
+-   Final Presentation and Report: Completed by Dec. 10th, 2024.
+
+### Task Assignments:
+
+\[Use a table to assign tasks to team members with due dates.\]
+
+## Accountability and Expectations Attendance Policy:
+
+-   All team members are expected to attend scheduled meetings unless previously discussed.
+-   Quality of Work: All deliverables should be completed to a professional standard.
+-   Deadlines: All members are responsible for meeting deadlines. If someone cannot meet a deadline, they must notify the team in advance.
+
+## Conflict Resolution Plan Conflict Management:
+
+If a conflict arises, team members will: Discuss the issue openly during a team meeting. Attempt to resolve the issue through compromise. If the conflict persists, consult the project supervisor for guidance.
+
+## Signatures
+
+By signing below, each team member agrees to the terms of this contract and commits to working together effectively and respectfully.
+
+-   Remi Hendershott Date: 9-30-24
+
+-   Ravleen Kaur Chadha Date: 9-30-24
+
+-   Neha Chaudhari Date: 9-30-24
+
+-   Connor Alubowicz Date: 9-30-24
+
+-   Anudeep Appiktla Date: 9-30-24
+
+-   Aditya Bandimatt Nagaraj Date: 9-30-24
