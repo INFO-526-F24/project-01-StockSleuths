@@ -12,7 +12,7 @@ This project was developed by **Stock Sleuths** For [INFO 526 - Data Analysis an
 
 -   Anudeep Appikatla:
 
--   Connor Alubowicz:
+-   Conner Alubowicz: Accelerated Master's Student studying Industrial Engineering with a plan of getting into data science / ML, after graduation.
 
 -   Neha Suresh Chaudhari:
 
