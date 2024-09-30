@@ -99,7 +99,7 @@ Decisions will be made by consensus; if a consensus cannot be reached, a vote wi
 
 -   Final Presentation and Report: Completed by Dec. 10th, 2024.
 
-### Task Assignments:
+### Task Assignments :
 
 |                     | Task Description                                                             | Team Member | Due Date |
 |---------------------|------------------------------------------------------------------------------|-------------|----------|
