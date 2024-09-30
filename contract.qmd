@@ -14,7 +14,7 @@ editor: visual
 | Ravleen Kaur Chadha      | ravleenchadha\@arizona.edu    |
 | Neha Chaudhari           | nehaschaudhari02\@arizona.edu |
 | Anudeep Appikatla        | anudeepappikatla\@arizona.edu |
-| Connor Alubowicz         | calubowicz\@arizona.edu       |
+| Conner Alubowicz         | calubowicz\@arizona.edu       |
 | Aditya Bandimatt Nagaraj | bandimatt\@arizona.edu        |
 
 ## Project Overview:
