@@ -39,7 +39,7 @@ Our goal is to examine the effects of the Russia/Ukraine war on the U.S. economy
 
 -   Project Manager: Remi Hendershott – Ensures timelines are met, organizes meetings, and manages communications.
 
--   Data Analyst: Anudeep Appikatla & Connor Alubowicz – Responsible for data cleaning, analysis, and exploratory visualizations.
+-   Data Analyst: Anudeep Appikatla & Conner Alubowicz – Responsible for data cleaning, analysis, and exploratory visualizations.
 
 -   Visualization Specialist: Ravleen Kaur Chadha & Neha Chaudhari – Designs the final visualizations and makes aesthetic choices.
 
