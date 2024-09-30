@@ -6,7 +6,7 @@ editor: visual
 
 This project was developed by **Stock Slayers** For [INFO 526 - Data Analysis and Visualization](https://datavizaz.org/) at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.
 
--   Ravleen Kaur Chadha:
+-   Ravleen Kaur Chadha: First year Master of Science in Data Science student aiming to get into financial analysis post graduation.
 
 -   Remi Hendershott: First year Master's student in Information Science with a sub-plan of Human-Centered Computing.
 
