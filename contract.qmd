@@ -45,6 +45,7 @@ Our goal is to examine the effects of the Russia/Ukraine war on the U.S. economy
 
 1. Identify and select appropriate datasets to generate accurate and meaningful visualizations.
 
+<<<<<<< HEAD
 2. Select the most suitable plots or graphs for datasets to ensure clear and effective interpretation.
 
 3. Create visually appealing plots that are accessible and inclusive for individuals with color vision deficiencies.
@@ -52,6 +53,8 @@ Our goal is to examine the effects of the Russia/Ukraine war on the U.S. economy
 4. Interpret relationships between geopolitical events and market performance.
 
 5. Analyze the war’s impact on U.S. oil prices and stock trends.
+
+6.  Relevant data gathering and data analysis to meet the objectives
 
 
 ## Team Roles and Responsibilities Roles:
