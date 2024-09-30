@@ -43,18 +43,17 @@ Our goal is to examine the effects of the Russia/Ukraine war on the U.S. economy
 
 ### Learning Objectives:
 
-1. Identify and select appropriate datasets to generate accurate and meaningful visualizations.
+1.  Identify and select appropriate datasets to generate accurate and meaningful visualizations.
 
-2. Select the most suitable plots or graphs for datasets to ensure clear and effective interpretation.
+2.  Select the most suitable plots or graphs for datasets to ensure clear and effective interpretation.
 
-3. Create visually appealing plots that are accessible and inclusive for individuals with color vision deficiencies.
+3.  Create visually appealing plots that are accessible and inclusive for individuals with color vision deficiencies.
 
-4. Interpret relationships between geopolitical events and market performance.
+4.  Interpret relationships between geopolitical events and market performance.
 
-5. Analyze the war’s impact on U.S. oil prices and stock trends.
+5.  Analyze the war’s impact on U.S. oil prices and stock trends.
 
 6.  Relevant data gathering and data analysis to meet the objectives
-
 
 ## Team Roles and Responsibilities Roles:
 
@@ -101,8 +100,8 @@ Decisions will be made by consensus; if a consensus cannot be reached, a vote wi
 ### Task Assignments :
 
 |                     | Task Description                                                             | Team Member | Due Date |
-|---------------------|------------------------------------------------------------------------------|-------------|----------|
-| Acquiring Data Sets | Finding 3 data sets that meet project description.                           |             |          |
+|------------|--------------------------------------|------------|------------|
+| Acquiring Data Sets | Finding 3 data sets that meet project description.                           | Remi        |          |
 | Clean Data          | Remove/Replace NULL values. Normalize as needed. Change datatypes as needed. |             |          |
 | Questions           | Decide on 2 project questions.                                               |             |          |
 | Project Proposal    |                                                                              |             |          |
