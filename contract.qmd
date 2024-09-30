@@ -19,7 +19,7 @@ editor: visual
 
 ## Project Overview:
 
-Our goal is to examine the effects of the Russia/Ukraine war on the U.S. economy, with a specific focus on oil prices and stock market trends from the start of the conflict (February 2022 to the present). We selected these data sets and this topic because several team members are particularly interested in applying data science within the financial sector. We believe that analyzing the war's influence on the U.S. economy, particularly on stocks and oil prices, will provide valuable insights. Our team also agreed that exploring this relationship offers a creative and meaningful opportunity to enhance our data visualization skills.
+Our goal is to examine the effects of the Russia/Ukraine war on the U.S. economy, with a specific focus on oil prices and stock market trends from the start of the conflict (February 2022 to the present). We selected these datasets and this topic because several team members are particularly interested in applying data science within the financial sector. We believe that analyzing the war's influence on the U.S. economy, particularly on stocks and oil prices, will provide valuable insights. Our team also agreed that exploring this relationship offers a creative and meaningful opportunity to enhance our data visualization skills.
 
 ### Expected Deliverables:
 
@@ -43,6 +43,7 @@ Our goal is to examine the effects of the Russia/Ukraine war on the U.S. economy
 
 ### Learning Objectives:
 
+<<<<<<< HEAD
 1.  Identify and select appropriate datasets to generate accurate and meaningful visualizations.
 
 2.  Select the most suitable plots or graphs for datasets to ensure clear and effective interpretation.
@@ -50,6 +51,13 @@ Our goal is to examine the effects of the Russia/Ukraine war on the U.S. economy
 3.  Create visually appealing plots that are accessible and inclusive for individuals with color vision deficiencies.
 
 4.  
+=======
+1.  Research and understand the domain - Russia & Ukrain war and its impact on US economy
+
+2.  Relevant data gathering and data analysis to meet the set objectives
+
+3.  Build relevant plots and visualizations in R and Quarto
+>>>>>>> 2253437615b406166d4bf089da3bf15a483801bc
 
 ## Team Roles and Responsibilities Roles:
 
@@ -95,7 +103,18 @@ Decisions will be made by consensus; if a consensus cannot be reached, a vote wi
 
 ### Task Assignments:
 
-\[Use a table to assign tasks to team members with due dates.\]
+|                     | Task Description                                                              | Team Member | Due Date |
+|---------------------|-------------------------------------------------------------------------------|-------------|----------|
+| Acquiring Data Sets | Finding 3 data sets that meet project description.                            |             |          |
+| Clean Data          | Remove/Replace NULL values. Normalize as needed. Change datatypes as needed.  |             |          |
+| Questions           | Decide on 2 project questions.                                                |             |          |
+| Project Proposal    |                                                                               |             |          |
+| Peer Review         |                                                                               |             |          |
+| Data Mutation       |                                                                               |             |          |
+| Data Visualizations |                                                                               |             |          |
+| Write up            |                                                                               |             |          |
+| Presentation        |                                                                               |             |          |
+| Peer Review         |                                                                               |             |          |
 
 ## Accountability and Expectations Attendance Policy:
 

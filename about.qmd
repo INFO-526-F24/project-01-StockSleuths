@@ -14,6 +14,6 @@ This project was developed by **Stock Slayers** For [INFO 526 - Data Analysis an
 
 -   Conner Alubowicz: Accelerated Master's Student studying Industrial Engineering with a plan of getting into data science / ML, after graduation.
 
--   Neha Suresh Chaudhari:
+-   Neha Suresh Chaudhari: First year Master in Data Science student.
 
 -   Aditya Bandimatt: Second year Information Science Master's student with specialization in Machine Learning.
