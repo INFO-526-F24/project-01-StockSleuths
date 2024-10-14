@@ -5,7 +5,7 @@ author:
   - name: "Stock Sleuths"
     affiliations:
       - name: "School of Information, University of Arizona"
-description: "We aim to analyze the impact of the Russia/Ukraine conflict on the U.S. economy by focusing on oil prices and stock market trends from prior to the conflict, the beginning of the conflict (February 2022), and up to present day. By examining these trends, we aim to gain valuable insights into how the ongoing conflict has influenced the US economy, as an ally of Ukraine."
+description: "This project explores how the Russia-Ukraine conflict has impacted the U.S. economy, focusing on key indicators like oil prices and stock market trends. By analyzing data from before the conflict, its onset in February 2022, and up to the present, we aim to uncover how economic dynamics have shifted, particularly given the U.S.'s role as a key ally of Ukraine. This analysis will provide insights into the broader economic ripple effects of the conflict, shedding light on how global disruptions influence domestic markets."
 format:
   html:
     code-tools: true
@@ -31,7 +31,7 @@ library(tidyverse)
 #| message: false
 ```
 
-We aim to analyze the impact of the Russia/Ukraine war on the U.S. economy by focusing on oil prices and stock market trends from prior to the conflict, the beginning of the conflict (February 2022), and up to present day. To do this, we will use three primary datasets: one from the U.S. Energy Information Administration (EIA) containing data on U.S. crude oil prices, a Kaggle dataset tracking S&P 500 stock market data, and a dataset from the Federal Reserve Economic Data (FRED) on U.S. consumer sentiment. 
+We aim to analyze the impact of the Russia/Ukraine war on the U.S. economy by focusing on oil prices and stock market trends from prior to the conflict, the beginning of the conflict (February 2022), and up to present day. To do this, we will use three primary datasets: one from the U.S. Energy Information Administration (EIA) containing data on U.S. crude oil prices, a Kaggle dataset tracking S&P 500 stock market data, and a dataset from the Federal Reserve Economic Data (FRED) on U.S. consumer sentiment.
 
 These datasets will provide key insights into how these critical economic factors have shifted since the onset of the conflict, enabling a detailed exploration of potential correlations and trends. While the data is quantitative, we must consider if there might be underlying biases in the datasets that could skew results. For example, the consumer sentiment data could reflect certain demographic biases depending on how the data is collected, especially if it under represents certain groups of people.
 
