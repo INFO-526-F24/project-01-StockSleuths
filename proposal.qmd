@@ -24,6 +24,22 @@ execute:
 library(tidyverse)
 ```
 
+```{r}
+if (!require("pacman")) 
+  install.packages("pacman")
+
+# use this line for installing/loading
+pacman::p_load(tidyverse,
+               scales,
+               gridExtra,
+               ggridges,
+               fs,
+               janitor,
+               readxl) 
+
+devtools::install_github("tidyverse/dsbox")
+```
+
 ## Datasets
 
 ```{r}
@@ -37,13 +53,30 @@ These datasets will provide key insights into how these critical economic factor
 
 **Dataset 1:** US Stock Market Data from Kaggle, sp500_stocks.csv (200 MB)  (<https://www.kaggle.com/datasets/andrewmvd/sp-500-stocks>) 
 
+```{r}
+sp500_data <- read_csv('data/sp500_index.csv')
+glimpse(sp500_data)
+```
+
 This dataset is updated daily and provides historical data, from as far back as 2010 up to current day, on the S&P 500, or Standard and Poor's 500, which is one of the world's most renowned financial benchmarks. This stock market index measures the performance of 500 major companies listed on U.S. stock exchanges, with the data originally being collected from FRED and Yahoo finance. Although it tracks 500 companies, the inclusion of multiple stock classes from some firms, such as Alphabet's Class A (GOOGL) and Class C (GOOG), means the index actually comprises 505 stocks. Since this data is aggregated and anonymized, there are no privacy concerns for individual investors.
 
 **Dataset 2:** EIA data pswrgvwall.xls (7 MB) <https://www.eia.gov/petroleum/gasdiesel/>
 
+```{r}
+oil_data <- read_excel("data/pswrgvwall.xls", sheet = "Data 1")
+glimpse(oil_data)
+```
+
 This dataset is from the U.S. Energy Information Administration and it provides historical data for crude oil prices in the US (spanning from the 1990s to present day), which has correlation with geopolitical events that affect supply and demand. It comes from a reputable government source, which means the data is considered reliable and transparent. However, it's always essential to acknowledge any potential limitations or assumptions made in the data collection process by this agency, as such limitations could influence analysis and its conclusions.
 
 **Dataset 3:** Consumer Sentiment & Inflation data from FRED umcsent.csv (501 bytes) and MICH.csv (8 KB) -merged together- <https://fred.stlouisfed.org/series/UMCSENT> <https://fred.stlouisfed.org/series/MICH>
+
+```{r}
+sent_data <- read_csv('data/UMCSENT.csv')
+inflation_data <- read_csv('data/MICH.csv')
+merged_data <- left_join(sent_data, inflation_data, by = 'DATE')
+glimpse(merged_data)
+```
 
 These datasets are from the Federal Reserve of Economic Data and provide data on economic indicators such as consumer sentiment and inflation expectations, to show the influence of economic changes on the economy and how society reacts. It is updated monthly and for the purposes of our project, we pulled data from February 2022 to present day. The data also comes from a trusted government source, which generally makes it reliable and transparent. However, it's important to recognize any potential limitations or assumptions in the agency's data collection process, as these factors could impact the analysis and its conclusions.
 
