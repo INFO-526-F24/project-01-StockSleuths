@@ -116,4 +116,10 @@ This question is important because the Russia/Ukraine war has had significant gl
 
 This question is crucial because consumer sentiment is a key indicator of economic health, reflecting public confidence in the economy and influencing spending and investment decisions. By examining how sentiment has shifted in relation to stock and oil price fluctuations, we can assess the broader psychological and behavioral impact of economic changes triggered by the conflict. By including inflation expectations, we aim to understand not only how people feel about the economy (consumer sentiment) but also how they perceive future inflationary pressures, giving a more rounded view of economic sentiment during the war. Understanding this relationship helps in anticipating consumer responses to market volatility, which is valuable for businesses, policymakers, and investors looking to gauge the potential economic trajectory during crises.
 
-\
+### **Hypotheses:** 
+
+Our project focuses on analyzing the economic impact of the Russia/Ukraine conflict on key U.S. economic indicators such as oil prices, stock market trends, consumer sentiment, and inflation expectations. We will use datasets from the U.S. Energy Information Administration (EIA) for oil prices, Kaggle for S&P 500 stock market data, and Federal Reserve Economic Data (FRED) for consumer sentiment and inflation expectations. By comparing data from prior to the conflict, at the beginning (February 2022), and up to the present day, we aim to explore correlations between these economic variables and assess the broader impact of geopolitical instability on the U.S. economy.
+
+1.  **Question 1 Hypothesis:** We hypothesize that the results of our data analysis will show that the onset of the Russia/Ukraine conflict has led to a significant increase in U.S. crude oil prices, driven by supply chain disruptions and heightened geopolitical risk.
+
+2.  **Question 2 Hypothesis:** We hypothesize that the results of our data analysis will show that U.S. stock prices, consumer sentiment, and inflation expectations have experienced greater volatility and negative trends since the start of the conflict, with stock prices declining, consumer sentiment weakening, and inflation expectations rising in response to oil price increases and economic uncertainty.
