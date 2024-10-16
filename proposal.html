@@ -4805,7 +4805,10 @@ vertical-align: -.125em;
   <ul>
   <li><a href="#datasets" id="toc-datasets" class="nav-link active" data-scroll-target="#datasets">Datasets</a></li>
   <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a></li>
-  <li><a href="#analysis-plan" id="toc-analysis-plan" class="nav-link" data-scroll-target="#analysis-plan">Analysis plan</a></li>
+  <li><a href="#analysis-plan" id="toc-analysis-plan" class="nav-link" data-scroll-target="#analysis-plan">Analysis plan</a>
+  <ul class="collapse">
+  <li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses"><strong>Hypotheses:</strong></a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -4853,15 +4856,82 @@ vertical-align: -.125em;
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&quot;pacman&quot;</span>)) </span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;pacman&quot;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># use this line for installing/loading</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse,</span>
+<span id="cb2-6"><a href="#cb2-6"></a>               scales,</span>
+<span id="cb2-7"><a href="#cb2-7"></a>               gridExtra,</span>
+<span id="cb2-8"><a href="#cb2-8"></a>               ggridges,</span>
+<span id="cb2-9"><a href="#cb2-9"></a>               fs,</span>
+<span id="cb2-10"><a href="#cb2-10"></a>               janitor,</span>
+<span id="cb2-11"><a href="#cb2-11"></a>               readxl) </span>
+<span id="cb2-12"><a href="#cb2-12"></a></span>
+<span id="cb2-13"><a href="#cb2-13"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;tidyverse/dsbox&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <section id="datasets" class="level2">
 <h2 class="anchored" data-anchor-id="datasets">Datasets</h2>
 <p>We aim to analyze the impact of the Russia/Ukraine war on the U.S. economy by focusing on oil prices and stock market trends from prior to the conflict, the beginning of the conflict (February 2022), and up to present day. To do this, we will use three primary datasets: one from the U.S. Energy Information Administration (EIA) containing data on U.S. crude oil prices, a Kaggle dataset tracking S&amp;P 500 stock market data, and a dataset from the Federal Reserve Economic Data (FRED) on U.S. consumer sentiment.</p>
 <p>These datasets will provide key insights into how these critical economic factors have shifted since the onset of the conflict, enabling a detailed exploration of potential correlations and trends. While the data is quantitative, we must consider if there might be underlying biases in the datasets that could skew results. For example, the consumer sentiment data could reflect certain demographic biases depending on how the data is collected, especially if it under represents certain groups of people.</p>
 <p><strong>Dataset 1:</strong> US Stock Market Data from Kaggle, sp500_stocks.csv (200 MB)  (<a href="https://www.kaggle.com/datasets/andrewmvd/sp-500-stocks" class="uri">https://www.kaggle.com/datasets/andrewmvd/sp-500-stocks</a>) </p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>sp500_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;data/sp500_index.csv&#39;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">glimpse</span>(sp500_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 2,517
+Columns: 2
+$ Date     &lt;date&gt; 2014-10-13, 2014-10-14, 2014-10-15, 2014-10-16, 2014-10-17, …
+$ `S&amp;P500` &lt;dbl&gt; 1874.74, 1877.70, 1862.49, 1862.76, 1886.76, 1904.01, 1941.28…</code></pre>
+</div>
+</div>
 <p>This dataset is updated daily and provides historical data, from as far back as 2010 up to current day, on the S&amp;P 500, or Standard and Poor’s 500, which is one of the world’s most renowned financial benchmarks. This stock market index measures the performance of 500 major companies listed on U.S. stock exchanges, with the data originally being collected from FRED and Yahoo finance. Although it tracks 500 companies, the inclusion of multiple stock classes from some firms, such as Alphabet’s Class A (GOOGL) and Class C (GOOG), means the index actually comprises 505 stocks. Since this data is aggregated and anonymized, there are no privacy concerns for individual investors.</p>
 <p><strong>Dataset 2:</strong> EIA data pswrgvwall.xls (7 MB) <a href="https://www.eia.gov/petroleum/gasdiesel/" class="uri">https://www.eia.gov/petroleum/gasdiesel/</a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>oil_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/pswrgvwall.xls&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Data 1&quot;</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">glimpse</span>(oil_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,784
+Columns: 21
+$ `Back to Contents`             &lt;chr&gt; &quot;Sourcekey&quot;, &quot;Date&quot;, &quot;33105&quot;, &quot;33112&quot;, …
+$ `Data 1: Regular Conventional` &lt;chr&gt; &quot;EMM_EPMRU_PTE_NUS_DPG&quot;, &quot;Weekly U.S. R…
+$ ...3                           &lt;chr&gt; &quot;EMM_EPMRU_PTE_R10_DPG&quot;, &quot;Weekly East C…
+$ ...4                           &lt;chr&gt; &quot;EMM_EPMRU_PTE_R1X_DPG&quot;, &quot;Weekly New En…
+$ ...5                           &lt;chr&gt; &quot;EMM_EPMRU_PTE_R1Y_DPG&quot;, &quot;Weekly Centra…
+$ ...6                           &lt;chr&gt; &quot;EMM_EPMRU_PTE_R1Z_DPG&quot;, &quot;Weekly Lower …
+$ ...7                           &lt;chr&gt; &quot;EMM_EPMRU_PTE_R20_DPG&quot;, &quot;Weekly Midwes…
+$ ...8                           &lt;chr&gt; &quot;EMM_EPMRU_PTE_R30_DPG&quot;, &quot;Weekly Gulf C…
+$ ...9                           &lt;chr&gt; &quot;EMM_EPMRU_PTE_R40_DPG&quot;, &quot;Weekly Rocky …
+$ ...10                          &lt;chr&gt; &quot;EMM_EPMRU_PTE_R50_DPG&quot;, &quot;Weekly West C…
+$ ...11                          &lt;chr&gt; &quot;EMM_EPMRU_PTE_SCO_DPG&quot;, &quot;Weekly Colora…
+$ ...12                          &lt;chr&gt; &quot;EMM_EPMRU_PTE_SFL_DPG&quot;, &quot;Weekly Florid…
+$ ...13                          &lt;chr&gt; &quot;EMM_EPMRU_PTE_SNY_DPG&quot;, &quot;Weekly New Yo…
+$ ...14                          &lt;chr&gt; &quot;EMM_EPMRU_PTE_SMN_DPG&quot;, &quot;Weekly Minnes…
+$ ...15                          &lt;chr&gt; &quot;EMM_EPMRU_PTE_SOH_DPG&quot;, &quot;Weekly Ohio R…
+$ ...16                          &lt;chr&gt; &quot;EMM_EPMRU_PTE_STX_DPG&quot;, &quot;Weekly Texas …
+$ ...17                          &lt;chr&gt; &quot;EMM_EPMRU_PTE_SWA_DPG&quot;, &quot;Weekly Washin…
+$ ...18                          &lt;chr&gt; &quot;EMM_EPMRU_PTE_YCLE_DPG&quot;, &quot;Weekly Cleve…
+$ ...19                          &lt;chr&gt; &quot;EMM_EPMRU_PTE_YDEN_DPG&quot;, &quot;Weekly Denve…
+$ ...20                          &lt;chr&gt; &quot;EMM_EPMRU_PTE_YMIA_DPG&quot;, &quot;Weekly Miami…
+$ ...21                          &lt;chr&gt; &quot;EMM_EPMRU_PTE_Y48SE_DPG&quot;, &quot;Weekly Seat…</code></pre>
+</div>
+</div>
 <p>This dataset is from the U.S. Energy Information Administration and it provides historical data for crude oil prices in the US (spanning from the 1990s to present day), which has correlation with geopolitical events that affect supply and demand. It comes from a reputable government source, which means the data is considered reliable and transparent. However, it’s always essential to acknowledge any potential limitations or assumptions made in the data collection process by this agency, as such limitations could influence analysis and its conclusions.</p>
 <p><strong>Dataset 3:</strong> Consumer Sentiment &amp; Inflation data from FRED umcsent.csv (501 bytes) and MICH.csv (8 KB) -merged together- <a href="https://fred.stlouisfed.org/series/UMCSENT" class="uri">https://fred.stlouisfed.org/series/UMCSENT</a> <a href="https://fred.stlouisfed.org/series/MICH" class="uri">https://fred.stlouisfed.org/series/MICH</a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>sent_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;data/UMCSENT.csv&#39;</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a>inflation_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;data/MICH.csv&#39;</span>)</span>
+<span id="cb7-3"><a href="#cb7-3"></a>merged_data <span class="ot">&lt;-</span> <span class="fu">left_join</span>(sent_data, inflation_data, <span class="at">by =</span> <span class="st">&#39;DATE&#39;</span>)</span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="fu">glimpse</span>(merged_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 862
+Columns: 3
+$ DATE    &lt;date&gt; 1952-11-01, 1952-12-01, 1953-01-01, 1953-02-01, 1953-03-01, 1…
+$ UMCSENT &lt;chr&gt; &quot;86.2&quot;, &quot;.&quot;, &quot;.&quot;, &quot;90.7&quot;, &quot;.&quot;, &quot;.&quot;, &quot;.&quot;, &quot;.&quot;, &quot;.&quot;, &quot;80.8&quot;, &quot;.&quot;…
+$ MICH    &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</code></pre>
+</div>
+</div>
 <p>These datasets are from the Federal Reserve of Economic Data and provide data on economic indicators such as consumer sentiment and inflation expectations, to show the influence of economic changes on the economy and how society reacts. It is updated monthly and for the purposes of our project, we pulled data from February 2022 to present day. The data also comes from a trusted government source, which generally makes it reliable and transparent. However, it’s important to recognize any potential limitations or assumptions in the agency’s data collection process, as these factors could impact the analysis and its conclusions.</p>
 <p>We chose these datasets and this topic because some of our team members have a strong interest in how data science can be used in the financial industry. We believe it will be insightful to analyze the impacts of the Russia/Ukraine conflict on the US economy, specifically on stocks and oil prices. Our team agreed exploring this relationship would be a valuable and creative way to strengthen our data visualization skills.</p>
 </section>
@@ -4889,12 +4959,18 @@ vertical-align: -.125em;
 <li><p><strong>Inflation Expectations</strong> (quantitative) – from the FRED dataset</p></li>
 </ul>
 <p>This question is crucial because consumer sentiment is a key indicator of economic health, reflecting public confidence in the economy and influencing spending and investment decisions. By examining how sentiment has shifted in relation to stock and oil price fluctuations, we can assess the broader psychological and behavioral impact of economic changes triggered by the conflict. By including inflation expectations, we aim to understand not only how people feel about the economy (consumer sentiment) but also how they perceive future inflationary pressures, giving a more rounded view of economic sentiment during the war. Understanding this relationship helps in anticipating consumer responses to market volatility, which is valuable for businesses, policymakers, and investors looking to gauge the potential economic trajectory during crises.</p>
-<p><br>
-</p>
+<section id="hypotheses" class="level3">
+<h3 class="anchored" data-anchor-id="hypotheses"><strong>Hypotheses:</strong></h3>
+<p>Our project focuses on analyzing the economic impact of the Russia/Ukraine conflict on key U.S. economic indicators such as oil prices, stock market trends, consumer sentiment, and inflation expectations. We will use datasets from the U.S. Energy Information Administration (EIA) for oil prices, Kaggle for S&amp;P 500 stock market data, and Federal Reserve Economic Data (FRED) for consumer sentiment and inflation expectations. By comparing data from prior to the conflict, at the beginning (February 2022), and up to the present day, we aim to explore correlations between these economic variables and assess the broader impact of geopolitical instability on the U.S. economy.</p>
+<ol type="1">
+<li><p><strong>Question 1 Hypothesis:</strong> We hypothesize that the results of our data analysis will show that the onset of the Russia/Ukraine conflict has led to a significant increase in U.S. crude oil prices, driven by supply chain disruptions and heightened geopolitical risk.</p></li>
+<li><p><strong>Question 2 Hypothesis:</strong> We hypothesize that the results of our data analysis will show that U.S. stock prices, consumer sentiment, and inflation expectations have experienced greater volatility and negative trends since the start of the conflict, with stock prices declining, consumer sentiment weakening, and inflation expectations rising in response to oil price increases and economic uncertainty.</p></li>
+</ol>
 
 
 <!-- -->
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -5552,92 +5628,131 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class>
-<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">---</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="an">title:</span><span class="co"> &quot;The Influence of Russia/Ukraine Conflict on US Economy&quot;</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="an">subtitle:</span><span class="co"> &quot;Proposal&quot;</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="an">author:</span><span class="co"> </span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co">  - name: &quot;Stock Sleuths&quot;</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="co">    affiliations:</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="co">      - name: &quot;School of Information, University of Arizona&quot;</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="an">description:</span><span class="co"> &quot;This project explores how the Russia-Ukraine conflict has impacted the U.S. economy, focusing on key indicators like oil prices and stock market trends. By analyzing data from before the conflict, its onset in February 2022, and up to the present, we aim to uncover how economic dynamics have shifted, particularly given the U.S.&#39;s role as a key ally of Ukraine. This analysis will provide insights into the broader economic ripple effects of the conflict, shedding light on how global disruptions influence domestic markets.&quot;</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="an">format:</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co">  html:</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="co">    code-tools: true</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="co">    code-overflow: wrap</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="co">    code-line-numbers: true</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="co">    embed-resources: true</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a><span class="an">editor:</span><span class="co"> visual</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a><span class="an">code-annotations:</span><span class="co"> hover</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a><span class="an">execute:</span></span>
-<span id="cb2-18"><a href="#cb2-18"></a><span class="co">  warning: false</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a><span class="co">---</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a></span>
-<span id="cb2-23"><a href="#cb2-23"></a><span class="in">```{r}</span></span>
-<span id="cb2-24"><a href="#cb2-24"></a><span class="co">#| label: load-pkgs</span></span>
-<span id="cb2-25"><a href="#cb2-25"></a><span class="co">#| message: false</span></span>
-<span id="cb2-26"><a href="#cb2-26"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb2-27"><a href="#cb2-27"></a><span class="in">```</span></span>
-<span id="cb2-28"><a href="#cb2-28"></a></span>
-<span id="cb2-29"><a href="#cb2-29"></a><span class="fu">## Datasets</span></span>
-<span id="cb2-30"><a href="#cb2-30"></a></span>
-<span id="cb2-33"><a href="#cb2-33"></a><span class="in">```{r}</span></span>
-<span id="cb2-34"><a href="#cb2-34"></a><span class="co">#| label: load-dataset</span></span>
-<span id="cb2-35"><a href="#cb2-35"></a><span class="co">#| message: false</span></span>
-<span id="cb2-36"><a href="#cb2-36"></a><span class="in">```</span></span>
-<span id="cb2-37"><a href="#cb2-37"></a></span>
-<span id="cb2-38"><a href="#cb2-38"></a>We aim to analyze the impact of the Russia/Ukraine war on the U.S. economy by focusing on oil prices and stock market trends from prior to the conflict, the beginning of the conflict (February 2022), and up to present day. To do this, we will use three primary datasets: one from the U.S. Energy Information Administration (EIA) containing data on U.S. crude oil prices, a Kaggle dataset tracking S&amp;P 500 stock market data, and a dataset from the Federal Reserve Economic Data (FRED) on U.S. consumer sentiment.</span>
-<span id="cb2-39"><a href="#cb2-39"></a></span>
-<span id="cb2-40"><a href="#cb2-40"></a>These datasets will provide key insights into how these critical economic factors have shifted since the onset of the conflict, enabling a detailed exploration of potential correlations and trends. While the data is quantitative, we must consider if there might be underlying biases in the datasets that could skew results. For example, the consumer sentiment data could reflect certain demographic biases depending on how the data is collected, especially if it under represents certain groups of people.</span>
-<span id="cb2-41"><a href="#cb2-41"></a></span>
-<span id="cb2-42"><a href="#cb2-42"></a>**Dataset 1:** US Stock Market Data from Kaggle, sp500_stocks.csv (200 MB)  (<span class="ot">&lt;https://www.kaggle.com/datasets/andrewmvd/sp-500-stocks&gt;</span>) </span>
-<span id="cb2-43"><a href="#cb2-43"></a></span>
-<span id="cb2-44"><a href="#cb2-44"></a>This dataset is updated daily and provides historical data, from as far back as 2010 up to current day, on the S&amp;P 500, or Standard and Poor&#39;s 500, which is one of the world&#39;s most renowned financial benchmarks. This stock market index measures the performance of 500 major companies listed on U.S. stock exchanges, with the data originally being collected from FRED and Yahoo finance. Although it tracks 500 companies, the inclusion of multiple stock classes from some firms, such as Alphabet&#39;s Class A (GOOGL) and Class C (GOOG), means the index actually comprises 505 stocks. Since this data is aggregated and anonymized, there are no privacy concerns for individual investors.</span>
-<span id="cb2-45"><a href="#cb2-45"></a></span>
-<span id="cb2-46"><a href="#cb2-46"></a>**Dataset 2:** EIA data pswrgvwall.xls (7 MB) <span class="ot">&lt;https://www.eia.gov/petroleum/gasdiesel/&gt;</span></span>
-<span id="cb2-47"><a href="#cb2-47"></a></span>
-<span id="cb2-48"><a href="#cb2-48"></a>This dataset is from the U.S. Energy Information Administration and it provides historical data for crude oil prices in the US (spanning from the 1990s to present day), which has correlation with geopolitical events that affect supply and demand. It comes from a reputable government source, which means the data is considered reliable and transparent. However, it&#39;s always essential to acknowledge any potential limitations or assumptions made in the data collection process by this agency, as such limitations could influence analysis and its conclusions.</span>
-<span id="cb2-49"><a href="#cb2-49"></a></span>
-<span id="cb2-50"><a href="#cb2-50"></a>**Dataset 3:** Consumer Sentiment &amp; Inflation data from FRED umcsent.csv (501 bytes) and MICH.csv (8 KB) -merged together- <span class="ot">&lt;https://fred.stlouisfed.org/series/UMCSENT&gt;</span> <span class="ot">&lt;https://fred.stlouisfed.org/series/MICH&gt;</span></span>
-<span id="cb2-51"><a href="#cb2-51"></a></span>
-<span id="cb2-52"><a href="#cb2-52"></a>These datasets are from the Federal Reserve of Economic Data and provide data on economic indicators such as consumer sentiment and inflation expectations, to show the influence of economic changes on the economy and how society reacts. It is updated monthly and for the purposes of our project, we pulled data from February 2022 to present day. The data also comes from a trusted government source, which generally makes it reliable and transparent. However, it&#39;s important to recognize any potential limitations or assumptions in the agency&#39;s data collection process, as these factors could impact the analysis and its conclusions.</span>
-<span id="cb2-53"><a href="#cb2-53"></a></span>
-<span id="cb2-54"><a href="#cb2-54"></a>We chose these datasets and this topic because some of our team members have a strong interest in how data science can be used in the financial industry. We believe it will be insightful to analyze the impacts of the Russia/Ukraine conflict on the US economy, specifically on stocks and oil prices. Our team agreed exploring this relationship would be a valuable and creative way to strengthen our data visualization skills.</span>
-<span id="cb2-55"><a href="#cb2-55"></a></span>
-<span id="cb2-56"><a href="#cb2-56"></a><span class="fu">## Questions</span></span>
-<span id="cb2-57"><a href="#cb2-57"></a></span>
-<span id="cb2-58"><a href="#cb2-58"></a>**Question 1: How have US stock and oil prices changed since the beginning of the Russia/Ukraine Conflict?**</span>
-<span id="cb2-59"><a href="#cb2-59"></a></span>
-<span id="cb2-60"><a href="#cb2-60"></a>**Question 2: How has consumer sentiment, stock prices, oil prices, and inflation expectations changed over time during the Russia/Ukraine conflict?**</span>
-<span id="cb2-61"><a href="#cb2-61"></a></span>
-<span id="cb2-62"><a href="#cb2-62"></a><span class="fu">## Analysis plan</span></span>
-<span id="cb2-63"><a href="#cb2-63"></a></span>
-<span id="cb2-64"><a href="#cb2-64"></a>**Question 1 Approach:** We will first analyze how U.S. stock prices and oil prices have evolved since the beginning of the Russia/Ukraine conflict. We will visualize these trends using a **time series plot** and explore the relationship between stock and oil prices through a **scatter plot**. Before proceeding with the analysis, we will clean and preprocess the data to address any missing or inconsistent values, ensuring the datasets are ready for analysis. We will also conduct exploratory data analysis (EDA) to identify initial patterns and trends in the data. </span>
-<span id="cb2-65"><a href="#cb2-65"></a></span>
-<span id="cb2-66"><a href="#cb2-66"></a>**Variables**:</span>
-<span id="cb2-67"><a href="#cb2-67"></a></span>
-<span id="cb2-68"><a href="#cb2-68"></a><span class="ss">-   </span>**U.S. stock prices** (quantitative)</span>
-<span id="cb2-69"><a href="#cb2-69"></a></span>
-<span id="cb2-70"><a href="#cb2-70"></a><span class="ss">-   </span>**Oil prices** (quantitative)</span>
-<span id="cb2-71"><a href="#cb2-71"></a></span>
-<span id="cb2-72"><a href="#cb2-72"></a><span class="ss">-   </span>**Time since the start of the conflict** (categorical or quantitative depending on how time is measured, e.g., by year/month or as a binary pre-/post-conflict variable)</span>
-<span id="cb2-73"><a href="#cb2-73"></a></span>
-<span id="cb2-74"><a href="#cb2-74"></a>This question is important because the Russia/Ukraine war has had significant global economic ramifications, particularly on energy markets and financial stability. Understanding the specific changes in U.S. oil and stock prices during this period can reveal the direct economic impact of geopolitical conflicts on the U.S. economy.</span>
-<span id="cb2-75"><a href="#cb2-75"></a></span>
-<span id="cb2-76"><a href="#cb2-76"></a>**Question 2 Approach:** We will investigate how consumer sentiment has fluctuated alongside changes in stock and oil prices. This will involve using a **box plot** to capture the distribution of consumer sentiment and a **line plot** to reveal trends over time. By combining these visualizations with statistical analysis, we aim to uncover meaningful patterns and connections between the conflict and U.S. economic indicators.</span>
-<span id="cb2-77"><a href="#cb2-77"></a></span>
-<span id="cb2-78"><a href="#cb2-78"></a>**Variables**:</span>
-<span id="cb2-79"><a href="#cb2-79"></a></span>
-<span id="cb2-80"><a href="#cb2-80"></a><span class="ss">-   </span>**Consumer sentiment** (quantitative)</span>
-<span id="cb2-81"><a href="#cb2-81"></a></span>
-<span id="cb2-82"><a href="#cb2-82"></a><span class="ss">-   </span>**U.S. stock prices** (quantitative)</span>
-<span id="cb2-83"><a href="#cb2-83"></a></span>
-<span id="cb2-84"><a href="#cb2-84"></a><span class="ss">-   </span>**Oil prices** (quantitative)</span>
-<span id="cb2-85"><a href="#cb2-85"></a></span>
-<span id="cb2-86"><a href="#cb2-86"></a><span class="ss">-   </span>**Inflation Expectations** (quantitative) – from the FRED dataset</span>
-<span id="cb2-87"><a href="#cb2-87"></a></span>
-<span id="cb2-88"><a href="#cb2-88"></a>This question is crucial because consumer sentiment is a key indicator of economic health, reflecting public confidence in the economy and influencing spending and investment decisions. By examining how sentiment has shifted in relation to stock and oil price fluctuations, we can assess the broader psychological and behavioral impact of economic changes triggered by the conflict. By including inflation expectations, we aim to understand not only how people feel about the economy (consumer sentiment) but also how they perceive future inflationary pressures, giving a more rounded view of economic sentiment during the war. Understanding this relationship helps in anticipating consumer responses to market volatility, which is valuable for businesses, policymakers, and investors looking to gauge the potential economic trajectory during crises.</span>
-<span id="cb2-89"><a href="#cb2-89"></a></span>
-<span id="cb2-90"><a href="#cb2-90"></a>\</span>
+<div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">---</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="an">title:</span><span class="co"> &quot;The Influence of Russia/Ukraine Conflict on US Economy&quot;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="an">subtitle:</span><span class="co"> &quot;Proposal&quot;</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="an">author:</span><span class="co"> </span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">  - name: &quot;Stock Sleuths&quot;</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co">    affiliations:</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co">      - name: &quot;School of Information, University of Arizona&quot;</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="an">description:</span><span class="co"> &quot;This project explores how the Russia-Ukraine conflict has impacted the U.S. economy, focusing on key indicators like oil prices and stock market trends. By analyzing data from before the conflict, its onset in February 2022, and up to the present, we aim to uncover how economic dynamics have shifted, particularly given the U.S.&#39;s role as a key ally of Ukraine. This analysis will provide insights into the broader economic ripple effects of the conflict, shedding light on how global disruptions influence domestic markets.&quot;</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="an">format:</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="co">  html:</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="co">    code-tools: true</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="co">    code-overflow: wrap</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="co">    code-line-numbers: true</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="co">    embed-resources: true</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="an">editor:</span><span class="co"> visual</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a><span class="an">code-annotations:</span><span class="co"> hover</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="an">execute:</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a><span class="co">  warning: false</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a><span class="co">---</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a></span>
+<span id="cb9-23"><a href="#cb9-23"></a><span class="in">```{r}</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a><span class="co">#| label: load-pkgs</span></span>
+<span id="cb9-25"><a href="#cb9-25"></a><span class="co">#| message: false</span></span>
+<span id="cb9-26"><a href="#cb9-26"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb9-27"><a href="#cb9-27"></a><span class="in">```</span></span>
+<span id="cb9-28"><a href="#cb9-28"></a></span>
+<span id="cb9-31"><a href="#cb9-31"></a><span class="in">```{r}</span></span>
+<span id="cb9-32"><a href="#cb9-32"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&quot;pacman&quot;</span>)) </span>
+<span id="cb9-33"><a href="#cb9-33"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;pacman&quot;</span>)</span>
+<span id="cb9-34"><a href="#cb9-34"></a></span>
+<span id="cb9-35"><a href="#cb9-35"></a><span class="co"># use this line for installing/loading</span></span>
+<span id="cb9-36"><a href="#cb9-36"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse,</span>
+<span id="cb9-37"><a href="#cb9-37"></a>               scales,</span>
+<span id="cb9-38"><a href="#cb9-38"></a>               gridExtra,</span>
+<span id="cb9-39"><a href="#cb9-39"></a>               ggridges,</span>
+<span id="cb9-40"><a href="#cb9-40"></a>               fs,</span>
+<span id="cb9-41"><a href="#cb9-41"></a>               janitor,</span>
+<span id="cb9-42"><a href="#cb9-42"></a>               readxl) </span>
+<span id="cb9-43"><a href="#cb9-43"></a></span>
+<span id="cb9-44"><a href="#cb9-44"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;tidyverse/dsbox&quot;</span>)</span>
+<span id="cb9-45"><a href="#cb9-45"></a><span class="in">```</span></span>
+<span id="cb9-46"><a href="#cb9-46"></a></span>
+<span id="cb9-47"><a href="#cb9-47"></a><span class="fu">## Datasets</span></span>
+<span id="cb9-48"><a href="#cb9-48"></a></span>
+<span id="cb9-51"><a href="#cb9-51"></a><span class="in">```{r}</span></span>
+<span id="cb9-52"><a href="#cb9-52"></a><span class="co">#| label: load-dataset</span></span>
+<span id="cb9-53"><a href="#cb9-53"></a><span class="co">#| message: false</span></span>
+<span id="cb9-54"><a href="#cb9-54"></a><span class="in">```</span></span>
+<span id="cb9-55"><a href="#cb9-55"></a></span>
+<span id="cb9-56"><a href="#cb9-56"></a>We aim to analyze the impact of the Russia/Ukraine war on the U.S. economy by focusing on oil prices and stock market trends from prior to the conflict, the beginning of the conflict (February 2022), and up to present day. To do this, we will use three primary datasets: one from the U.S. Energy Information Administration (EIA) containing data on U.S. crude oil prices, a Kaggle dataset tracking S&amp;P 500 stock market data, and a dataset from the Federal Reserve Economic Data (FRED) on U.S. consumer sentiment.</span>
+<span id="cb9-57"><a href="#cb9-57"></a></span>
+<span id="cb9-58"><a href="#cb9-58"></a>These datasets will provide key insights into how these critical economic factors have shifted since the onset of the conflict, enabling a detailed exploration of potential correlations and trends. While the data is quantitative, we must consider if there might be underlying biases in the datasets that could skew results. For example, the consumer sentiment data could reflect certain demographic biases depending on how the data is collected, especially if it under represents certain groups of people.</span>
+<span id="cb9-59"><a href="#cb9-59"></a></span>
+<span id="cb9-60"><a href="#cb9-60"></a>**Dataset 1:** US Stock Market Data from Kaggle, sp500_stocks.csv (200 MB)  (<span class="ot">&lt;https://www.kaggle.com/datasets/andrewmvd/sp-500-stocks&gt;</span>) </span>
+<span id="cb9-61"><a href="#cb9-61"></a></span>
+<span id="cb9-64"><a href="#cb9-64"></a><span class="in">```{r}</span></span>
+<span id="cb9-65"><a href="#cb9-65"></a>sp500_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;data/sp500_index.csv&#39;</span>)</span>
+<span id="cb9-66"><a href="#cb9-66"></a><span class="fu">glimpse</span>(sp500_data)</span>
+<span id="cb9-67"><a href="#cb9-67"></a><span class="in">```</span></span>
+<span id="cb9-68"><a href="#cb9-68"></a></span>
+<span id="cb9-69"><a href="#cb9-69"></a>This dataset is updated daily and provides historical data, from as far back as 2010 up to current day, on the S&amp;P 500, or Standard and Poor&#39;s 500, which is one of the world&#39;s most renowned financial benchmarks. This stock market index measures the performance of 500 major companies listed on U.S. stock exchanges, with the data originally being collected from FRED and Yahoo finance. Although it tracks 500 companies, the inclusion of multiple stock classes from some firms, such as Alphabet&#39;s Class A (GOOGL) and Class C (GOOG), means the index actually comprises 505 stocks. Since this data is aggregated and anonymized, there are no privacy concerns for individual investors.</span>
+<span id="cb9-70"><a href="#cb9-70"></a></span>
+<span id="cb9-71"><a href="#cb9-71"></a>**Dataset 2:** EIA data pswrgvwall.xls (7 MB) <span class="ot">&lt;https://www.eia.gov/petroleum/gasdiesel/&gt;</span></span>
+<span id="cb9-72"><a href="#cb9-72"></a></span>
+<span id="cb9-75"><a href="#cb9-75"></a><span class="in">```{r}</span></span>
+<span id="cb9-76"><a href="#cb9-76"></a>oil_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/pswrgvwall.xls&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Data 1&quot;</span>)</span>
+<span id="cb9-77"><a href="#cb9-77"></a><span class="fu">glimpse</span>(oil_data)</span>
+<span id="cb9-78"><a href="#cb9-78"></a><span class="in">```</span></span>
+<span id="cb9-79"><a href="#cb9-79"></a></span>
+<span id="cb9-80"><a href="#cb9-80"></a>This dataset is from the U.S. Energy Information Administration and it provides historical data for crude oil prices in the US (spanning from the 1990s to present day), which has correlation with geopolitical events that affect supply and demand. It comes from a reputable government source, which means the data is considered reliable and transparent. However, it&#39;s always essential to acknowledge any potential limitations or assumptions made in the data collection process by this agency, as such limitations could influence analysis and its conclusions.</span>
+<span id="cb9-81"><a href="#cb9-81"></a></span>
+<span id="cb9-82"><a href="#cb9-82"></a>**Dataset 3:** Consumer Sentiment &amp; Inflation data from FRED umcsent.csv (501 bytes) and MICH.csv (8 KB) -merged together- <span class="ot">&lt;https://fred.stlouisfed.org/series/UMCSENT&gt;</span> <span class="ot">&lt;https://fred.stlouisfed.org/series/MICH&gt;</span></span>
+<span id="cb9-83"><a href="#cb9-83"></a></span>
+<span id="cb9-86"><a href="#cb9-86"></a><span class="in">```{r}</span></span>
+<span id="cb9-87"><a href="#cb9-87"></a>sent_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;data/UMCSENT.csv&#39;</span>)</span>
+<span id="cb9-88"><a href="#cb9-88"></a>inflation_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;data/MICH.csv&#39;</span>)</span>
+<span id="cb9-89"><a href="#cb9-89"></a>merged_data <span class="ot">&lt;-</span> <span class="fu">left_join</span>(sent_data, inflation_data, <span class="at">by =</span> <span class="st">&#39;DATE&#39;</span>)</span>
+<span id="cb9-90"><a href="#cb9-90"></a><span class="fu">glimpse</span>(merged_data)</span>
+<span id="cb9-91"><a href="#cb9-91"></a><span class="in">```</span></span>
+<span id="cb9-92"><a href="#cb9-92"></a></span>
+<span id="cb9-93"><a href="#cb9-93"></a>These datasets are from the Federal Reserve of Economic Data and provide data on economic indicators such as consumer sentiment and inflation expectations, to show the influence of economic changes on the economy and how society reacts. It is updated monthly and for the purposes of our project, we pulled data from February 2022 to present day. The data also comes from a trusted government source, which generally makes it reliable and transparent. However, it&#39;s important to recognize any potential limitations or assumptions in the agency&#39;s data collection process, as these factors could impact the analysis and its conclusions.</span>
+<span id="cb9-94"><a href="#cb9-94"></a></span>
+<span id="cb9-95"><a href="#cb9-95"></a>We chose these datasets and this topic because some of our team members have a strong interest in how data science can be used in the financial industry. We believe it will be insightful to analyze the impacts of the Russia/Ukraine conflict on the US economy, specifically on stocks and oil prices. Our team agreed exploring this relationship would be a valuable and creative way to strengthen our data visualization skills.</span>
+<span id="cb9-96"><a href="#cb9-96"></a></span>
+<span id="cb9-97"><a href="#cb9-97"></a><span class="fu">## Questions</span></span>
+<span id="cb9-98"><a href="#cb9-98"></a></span>
+<span id="cb9-99"><a href="#cb9-99"></a>**Question 1: How have US stock and oil prices changed since the beginning of the Russia/Ukraine Conflict?**</span>
+<span id="cb9-100"><a href="#cb9-100"></a></span>
+<span id="cb9-101"><a href="#cb9-101"></a>**Question 2: How has consumer sentiment, stock prices, oil prices, and inflation expectations changed over time during the Russia/Ukraine conflict?**</span>
+<span id="cb9-102"><a href="#cb9-102"></a></span>
+<span id="cb9-103"><a href="#cb9-103"></a><span class="fu">## Analysis plan</span></span>
+<span id="cb9-104"><a href="#cb9-104"></a></span>
+<span id="cb9-105"><a href="#cb9-105"></a>**Question 1 Approach:** We will first analyze how U.S. stock prices and oil prices have evolved since the beginning of the Russia/Ukraine conflict. We will visualize these trends using a **time series plot** and explore the relationship between stock and oil prices through a **scatter plot**. Before proceeding with the analysis, we will clean and preprocess the data to address any missing or inconsistent values, ensuring the datasets are ready for analysis. We will also conduct exploratory data analysis (EDA) to identify initial patterns and trends in the data. </span>
+<span id="cb9-106"><a href="#cb9-106"></a></span>
+<span id="cb9-107"><a href="#cb9-107"></a>**Variables**:</span>
+<span id="cb9-108"><a href="#cb9-108"></a></span>
+<span id="cb9-109"><a href="#cb9-109"></a><span class="ss">-   </span>**U.S. stock prices** (quantitative)</span>
+<span id="cb9-110"><a href="#cb9-110"></a></span>
+<span id="cb9-111"><a href="#cb9-111"></a><span class="ss">-   </span>**Oil prices** (quantitative)</span>
+<span id="cb9-112"><a href="#cb9-112"></a></span>
+<span id="cb9-113"><a href="#cb9-113"></a><span class="ss">-   </span>**Time since the start of the conflict** (categorical or quantitative depending on how time is measured, e.g., by year/month or as a binary pre-/post-conflict variable)</span>
+<span id="cb9-114"><a href="#cb9-114"></a></span>
+<span id="cb9-115"><a href="#cb9-115"></a>This question is important because the Russia/Ukraine war has had significant global economic ramifications, particularly on energy markets and financial stability. Understanding the specific changes in U.S. oil and stock prices during this period can reveal the direct economic impact of geopolitical conflicts on the U.S. economy.</span>
+<span id="cb9-116"><a href="#cb9-116"></a></span>
+<span id="cb9-117"><a href="#cb9-117"></a>**Question 2 Approach:** We will investigate how consumer sentiment has fluctuated alongside changes in stock and oil prices. This will involve using a **box plot** to capture the distribution of consumer sentiment and a **line plot** to reveal trends over time. By combining these visualizations with statistical analysis, we aim to uncover meaningful patterns and connections between the conflict and U.S. economic indicators.</span>
+<span id="cb9-118"><a href="#cb9-118"></a></span>
+<span id="cb9-119"><a href="#cb9-119"></a>**Variables**:</span>
+<span id="cb9-120"><a href="#cb9-120"></a></span>
+<span id="cb9-121"><a href="#cb9-121"></a><span class="ss">-   </span>**Consumer sentiment** (quantitative)</span>
+<span id="cb9-122"><a href="#cb9-122"></a></span>
+<span id="cb9-123"><a href="#cb9-123"></a><span class="ss">-   </span>**U.S. stock prices** (quantitative)</span>
+<span id="cb9-124"><a href="#cb9-124"></a></span>
+<span id="cb9-125"><a href="#cb9-125"></a><span class="ss">-   </span>**Oil prices** (quantitative)</span>
+<span id="cb9-126"><a href="#cb9-126"></a></span>
+<span id="cb9-127"><a href="#cb9-127"></a><span class="ss">-   </span>**Inflation Expectations** (quantitative) – from the FRED dataset</span>
+<span id="cb9-128"><a href="#cb9-128"></a></span>
+<span id="cb9-129"><a href="#cb9-129"></a>This question is crucial because consumer sentiment is a key indicator of economic health, reflecting public confidence in the economy and influencing spending and investment decisions. By examining how sentiment has shifted in relation to stock and oil price fluctuations, we can assess the broader psychological and behavioral impact of economic changes triggered by the conflict. By including inflation expectations, we aim to understand not only how people feel about the economy (consumer sentiment) but also how they perceive future inflationary pressures, giving a more rounded view of economic sentiment during the war. Understanding this relationship helps in anticipating consumer responses to market volatility, which is valuable for businesses, policymakers, and investors looking to gauge the potential economic trajectory during crises.</span>
+<span id="cb9-130"><a href="#cb9-130"></a></span>
+<span id="cb9-131"><a href="#cb9-131"></a><span class="fu">### **Hypotheses:** </span></span>
+<span id="cb9-132"><a href="#cb9-132"></a></span>
+<span id="cb9-133"><a href="#cb9-133"></a>Our project focuses on analyzing the economic impact of the Russia/Ukraine conflict on key U.S. economic indicators such as oil prices, stock market trends, consumer sentiment, and inflation expectations. We will use datasets from the U.S. Energy Information Administration (EIA) for oil prices, Kaggle for S&amp;P 500 stock market data, and Federal Reserve Economic Data (FRED) for consumer sentiment and inflation expectations. By comparing data from prior to the conflict, at the beginning (February 2022), and up to the present day, we aim to explore correlations between these economic variables and assess the broader impact of geopolitical instability on the U.S. economy.</span>
+<span id="cb9-134"><a href="#cb9-134"></a></span>
+<span id="cb9-135"><a href="#cb9-135"></a><span class="ss">1.  </span>**Question 1 Hypothesis:** We hypothesize that the results of our data analysis will show that the onset of the Russia/Ukraine conflict has led to a significant increase in U.S. crude oil prices, driven by supply chain disruptions and heightened geopolitical risk.</span>
+<span id="cb9-136"><a href="#cb9-136"></a></span>
+<span id="cb9-137"><a href="#cb9-137"></a><span class="ss">2.  </span>**Question 2 Hypothesis:** We hypothesize that the results of our data analysis will show that U.S. stock prices, consumer sentiment, and inflation expectations have experienced greater volatility and negative trends since the start of the conflict, with stock prices declining, consumer sentiment weakening, and inflation expectations rising in response to oil price increases and economic uncertainty.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
