@@ -4938,24 +4938,24 @@ $ MICH    &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA
 </section>
 <section id="questions" class="level2">
 <h2 class="anchored" data-anchor-id="questions">Questions</h2>
-<p><strong>Question 1: How have US stock and oil prices changed since the beginning of the Russia/Ukraine Conflict?</strong></p>
-<p><strong>Question 2: How has consumer sentiment, stock prices, oil prices, and inflation expectations changed over time during the Russia/Ukraine conflict?</strong></p>
+<p><strong>Question 1: How have US Stock Market trends and oil prices changed since the beginning of the Russia/Ukraine Conflict?</strong></p>
+<p><strong>Question 2: How has consumer sentiment, stock trends, oil prices, and inflation expectations changed over time during the Russia/Ukraine conflict?</strong></p>
 </section>
 <section id="analysis-plan" class="level2">
 <h2 class="anchored" data-anchor-id="analysis-plan">Analysis plan</h2>
-<p><strong>Question 1 Approach:</strong> We will first analyze how U.S. stock prices and oil prices have evolved since the beginning of the Russia/Ukraine conflict. We will visualize these trends using a <strong>time series plot</strong> and explore the relationship between stock and oil prices through a <strong>scatter plot</strong>. Before proceeding with the analysis, we will clean and preprocess the data to address any missing or inconsistent values, ensuring the datasets are ready for analysis. We will also conduct exploratory data analysis (EDA) to identify initial patterns and trends in the data. </p>
+<p><strong>Question 1 Approach:</strong> We will first analyze how US stock trends (through the US Stock Market Performance Measure) and oil prices have evolved since the beginning of the Russia/Ukraine conflict. We will visualize these trends using a <strong>time series plot</strong> and explore the relationship between stock trends and oil prices through a <strong>scatter plot</strong>. Before proceeding with the analysis, we will clean and preprocess the data to address any missing or inconsistent values, ensuring the datasets are ready for analysis. We will also conduct exploratory data analysis (EDA) to identify initial patterns and trends in the data. </p>
 <p><strong>Variables</strong>:</p>
 <ul>
 <li><p><strong>US Stock Market Performance Measure</strong> (quantitative)</p></li>
 <li><p><strong>Oil prices</strong> (quantitative)</p></li>
 <li><p><strong>Time since the start of the conflict</strong> (categorical or quantitative depending on how time is measured, e.g., by year/month or as a binary pre-/post-conflict variable)</p></li>
 </ul>
-<p>This question is important because the Russia/Ukraine war has had significant global economic ramifications, particularly on energy markets and financial stability. Understanding the specific changes in U.S. oil and stock prices during this period can reveal the direct economic impact of geopolitical conflicts on the U.S. economy.</p>
-<p><strong>Question 2 Approach:</strong> We will investigate how consumer sentiment has fluctuated alongside changes in stock and oil prices. This will involve using a <strong>box plot</strong> to capture the distribution of consumer sentiment and a <strong>line plot</strong> to reveal trends over time. By combining these visualizations with statistical analysis, we aim to uncover meaningful patterns and connections between the conflict and U.S. economic indicators.</p>
+<p>This question is important because the Russia/Ukraine war has had significant global economic ramifications, particularly on energy markets and financial stability. Understanding the specific changes in U.S. oil and US Stock Market Performance Measure during this period can reveal the direct economic impact of geopolitical conflicts on the U.S. economy.</p>
+<p><strong>Question 2 Approach:</strong> We will investigate how consumer sentiment has fluctuated alongside changes in US Stock Market Performance Measure and oil prices. This will involve using a <strong>box plot</strong> to capture the distribution of consumer sentiment and a <strong>line plot</strong> to reveal trends over time. By combining these visualizations with statistical analysis, we aim to uncover meaningful patterns and connections between the conflict and U.S. economic indicators.</p>
 <p><strong>Variables</strong>:</p>
 <ul>
 <li><p><strong>Consumer sentiment</strong> (quantitative)</p></li>
-<li><p><strong>U.S. stock prices</strong> (quantitative)</p></li>
+<li><p><strong>US Stock Market Performance Measure</strong> (quantitative)</p></li>
 <li><p><strong>Oil prices</strong> (quantitative)</p></li>
 <li><p><strong>Inflation Expectations</strong> (quantitative) – from the FRED dataset</p></li>
 </ul>
@@ -4965,7 +4965,7 @@ $ MICH    &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA
 <p>Our project focuses on analyzing the economic impact of the Russia/Ukraine conflict on key U.S. economic indicators such as oil prices, stock market trends, consumer sentiment, and inflation expectations. We will use datasets from the U.S. Energy Information Administration (EIA) for oil prices, Kaggle for S&amp;P 500 stock market data, and Federal Reserve Economic Data (FRED) for consumer sentiment and inflation expectations. By comparing data from prior to the conflict, at the beginning (February 2022), and up to the present day, we aim to explore correlations between these economic variables and assess the broader impact of geopolitical instability on the U.S. economy.</p>
 <ol type="1">
 <li><p><strong>Question 1 Hypothesis:</strong> We hypothesize that the results of our data analysis will show that the onset of the Russia/Ukraine conflict has led to a significant increase in U.S. crude oil prices, driven by supply chain disruptions and heightened geopolitical risk.</p></li>
-<li><p><strong>Question 2 Hypothesis:</strong> We hypothesize that the results of our data analysis will show that U.S. stock prices, consumer sentiment, and inflation expectations have experienced greater volatility and negative trends since the start of the conflict, with stock prices declining, consumer sentiment weakening, and inflation expectations rising in response to oil price increases and economic uncertainty.</p></li>
+<li><p><strong>Question 2 Hypothesis:</strong> We hypothesize that the results of our data analysis will show that US Stock Market Performance Measure, consumer sentiment, and inflation expectations have experienced greater volatility and negative trends since the start of the conflict, with stock prices declining, consumer sentiment weakening, and inflation expectations rising in response to oil price increases and economic uncertainty.</p></li>
 </ol>
 </section>
 </section>
@@ -5719,13 +5719,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb9-96"><a href="#cb9-96"></a></span>
 <span id="cb9-97"><a href="#cb9-97"></a><span class="fu">## Questions</span></span>
 <span id="cb9-98"><a href="#cb9-98"></a></span>
-<span id="cb9-99"><a href="#cb9-99"></a>**Question 1: How have US stock and oil prices changed since the beginning of the Russia/Ukraine Conflict?**</span>
+<span id="cb9-99"><a href="#cb9-99"></a>**Question 1: How have US Stock Market trends and oil prices changed since the beginning of the Russia/Ukraine Conflict?**</span>
 <span id="cb9-100"><a href="#cb9-100"></a></span>
-<span id="cb9-101"><a href="#cb9-101"></a>**Question 2: How has consumer sentiment, stock prices, oil prices, and inflation expectations changed over time during the Russia/Ukraine conflict?**</span>
+<span id="cb9-101"><a href="#cb9-101"></a>**Question 2: How has consumer sentiment, stock trends, oil prices, and inflation expectations changed over time during the Russia/Ukraine conflict?**</span>
 <span id="cb9-102"><a href="#cb9-102"></a></span>
 <span id="cb9-103"><a href="#cb9-103"></a><span class="fu">## Analysis plan</span></span>
 <span id="cb9-104"><a href="#cb9-104"></a></span>
-<span id="cb9-105"><a href="#cb9-105"></a>**Question 1 Approach:** We will first analyze how U.S. stock prices and oil prices have evolved since the beginning of the Russia/Ukraine conflict. We will visualize these trends using a **time series plot** and explore the relationship between stock and oil prices through a **scatter plot**. Before proceeding with the analysis, we will clean and preprocess the data to address any missing or inconsistent values, ensuring the datasets are ready for analysis. We will also conduct exploratory data analysis (EDA) to identify initial patterns and trends in the data. </span>
+<span id="cb9-105"><a href="#cb9-105"></a>**Question 1 Approach:** We will first analyze how US stock trends (through the US Stock Market Performance Measure) and oil prices have evolved since the beginning of the Russia/Ukraine conflict. We will visualize these trends using a **time series plot** and explore the relationship between stock trends and oil prices through a **scatter plot**. Before proceeding with the analysis, we will clean and preprocess the data to address any missing or inconsistent values, ensuring the datasets are ready for analysis. We will also conduct exploratory data analysis (EDA) to identify initial patterns and trends in the data. </span>
 <span id="cb9-106"><a href="#cb9-106"></a></span>
 <span id="cb9-107"><a href="#cb9-107"></a>**Variables**:</span>
 <span id="cb9-108"><a href="#cb9-108"></a></span>
@@ -5735,15 +5735,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb9-112"><a href="#cb9-112"></a></span>
 <span id="cb9-113"><a href="#cb9-113"></a><span class="ss">-   </span>**Time since the start of the conflict** (categorical or quantitative depending on how time is measured, e.g., by year/month or as a binary pre-/post-conflict variable)</span>
 <span id="cb9-114"><a href="#cb9-114"></a></span>
-<span id="cb9-115"><a href="#cb9-115"></a>This question is important because the Russia/Ukraine war has had significant global economic ramifications, particularly on energy markets and financial stability. Understanding the specific changes in U.S. oil and stock prices during this period can reveal the direct economic impact of geopolitical conflicts on the U.S. economy.</span>
+<span id="cb9-115"><a href="#cb9-115"></a>This question is important because the Russia/Ukraine war has had significant global economic ramifications, particularly on energy markets and financial stability. Understanding the specific changes in U.S. oil and US Stock Market Performance Measure during this period can reveal the direct economic impact of geopolitical conflicts on the U.S. economy.</span>
 <span id="cb9-116"><a href="#cb9-116"></a></span>
-<span id="cb9-117"><a href="#cb9-117"></a>**Question 2 Approach:** We will investigate how consumer sentiment has fluctuated alongside changes in stock and oil prices. This will involve using a **box plot** to capture the distribution of consumer sentiment and a **line plot** to reveal trends over time. By combining these visualizations with statistical analysis, we aim to uncover meaningful patterns and connections between the conflict and U.S. economic indicators.</span>
+<span id="cb9-117"><a href="#cb9-117"></a>**Question 2 Approach:** We will investigate how consumer sentiment has fluctuated alongside changes in US Stock Market Performance Measure and oil prices. This will involve using a **box plot** to capture the distribution of consumer sentiment and a **line plot** to reveal trends over time. By combining these visualizations with statistical analysis, we aim to uncover meaningful patterns and connections between the conflict and U.S. economic indicators.</span>
 <span id="cb9-118"><a href="#cb9-118"></a></span>
 <span id="cb9-119"><a href="#cb9-119"></a>**Variables**:</span>
 <span id="cb9-120"><a href="#cb9-120"></a></span>
 <span id="cb9-121"><a href="#cb9-121"></a><span class="ss">-   </span>**Consumer sentiment** (quantitative)</span>
 <span id="cb9-122"><a href="#cb9-122"></a></span>
-<span id="cb9-123"><a href="#cb9-123"></a><span class="ss">-   </span>**U.S. stock prices** (quantitative)</span>
+<span id="cb9-123"><a href="#cb9-123"></a><span class="ss">-   </span>**US Stock Market Performance Measure** (quantitative)</span>
 <span id="cb9-124"><a href="#cb9-124"></a></span>
 <span id="cb9-125"><a href="#cb9-125"></a><span class="ss">-   </span>**Oil prices** (quantitative)</span>
 <span id="cb9-126"><a href="#cb9-126"></a></span>
@@ -5757,7 +5757,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb9-134"><a href="#cb9-134"></a></span>
 <span id="cb9-135"><a href="#cb9-135"></a><span class="ss">1.  </span>**Question 1 Hypothesis:** We hypothesize that the results of our data analysis will show that the onset of the Russia/Ukraine conflict has led to a significant increase in U.S. crude oil prices, driven by supply chain disruptions and heightened geopolitical risk.</span>
 <span id="cb9-136"><a href="#cb9-136"></a></span>
-<span id="cb9-137"><a href="#cb9-137"></a><span class="ss">2.  </span>**Question 2 Hypothesis:** We hypothesize that the results of our data analysis will show that U.S. stock prices, consumer sentiment, and inflation expectations have experienced greater volatility and negative trends since the start of the conflict, with stock prices declining, consumer sentiment weakening, and inflation expectations rising in response to oil price increases and economic uncertainty.</span>
+<span id="cb9-137"><a href="#cb9-137"></a><span class="ss">2.  </span>**Question 2 Hypothesis:** We hypothesize that the results of our data analysis will show that US Stock Market Performance Measure, consumer sentiment, and inflation expectations have experienced greater volatility and negative trends since the start of the conflict, with stock prices declining, consumer sentiment weakening, and inflation expectations rising in response to oil price increases and economic uncertainty.</span>
 <span id="cb9-138"><a href="#cb9-138"></a></span>
 <span id="cb9-139"><a href="#cb9-139"></a><span class="fu">## Citations</span></span>
 <span id="cb9-140"><a href="#cb9-140"></a></span>
