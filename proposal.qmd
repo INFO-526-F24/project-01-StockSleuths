@@ -94,7 +94,7 @@ We chose these datasets and this topic because some of our team members have a s
 
 **Variables**:
 
--   **U.S. stock prices** (quantitative)
+-   **US Stock Market Performance Measure** (quantitative)
 
 -   **Oil prices** (quantitative)
 
