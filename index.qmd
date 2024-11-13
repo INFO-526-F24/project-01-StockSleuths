@@ -1,11 +1,11 @@
 ---
-title: "Project Title"
+title: "The Influence of Russia/Ukraine Conflict on US Economy"
 subtitle: "INFO 526 - Fall 2024 - Project 01"
 author: 
-  - name: "Team name"
+  - name: "Stock Sleuths"
     affiliations:
       - name: "School of Information, University of Arizona"
-description: "Project description"
+description: "This project explores how the Russia-Ukraine conflict has impacted the U.S. economy, focusing on key indicators like oil prices and stock market trends. By analyzing data from before the conflict, its onset in February 2022, and up to the present, we aim to uncover how economic dynamics have shifted, particularly given the U.S.'s role as a key ally of Ukraine. This analysis will provide insights into the broader economic ripple effects of the conflict, shedding light on how global disruptions influence domestic markets."
 format:
    html:
     code-tools: true
@@ -19,4 +19,4 @@ execute:
 
 ## Abstract
 
-Add project abstract here.
+This study examines the economic impact of the Russia-Ukraine conflict on key U.S. indicators, specifically oil prices, stock market performance, consumer sentiment, and inflation expectations. Using time series data from the U.S. Energy Information Administration (EIA), Kaggle's S&P 500 data, and the Federal Reserve Economic Data (FRED), we assess trends from before the onset of the conflict in February 2022 to the present. Our analysis utilizes exploratory data analysis (EDA) and visualizations, including time series and distribution plots, to capture shifts and correlations across these variables in response to geopolitical pressures. We aim to uncover patterns indicating how U.S. markets and public sentiment have responded to the conflict, with a particular focus on the economic ripple effects of energy price volatility and market uncertainty. By analyzing these indicators over time, this study will provide insights into the complex ways in which global conflicts influence domestic economic stability and sentiment, informing a broader understanding of the impacts of international crises on the U.S. economy.
