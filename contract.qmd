@@ -99,18 +99,18 @@ Decisions will be made by consensus; if a consensus cannot be reached, a vote wi
 
 ### Task Assignments :
 
-|                     | Task Description                                                                                                                            | Team Member                | Due Date   |
-|------------|--------------------------------------|------------|------------|
-| Acquiring Data Sets | Finding 3 data sets that meet project description.                                                                                          | Remi                       | 9-30-2024  |
-| Clean Data          | Remove/Replace NULL values. Normalize as needed. Change datatypes as needed.                                                                | Anudeep & Conner           | 11-13-2024 |
-| Questions           | Decide on 2 project questions.                                                                                                              | Whole Team                 | 9-30-2024  |
-| Project Proposal    | Create a proposal including an introduction, description of data sets, glimpses of data, and our questions we seek to answer.               | Remi, Ravleen, & Anudeep   | 10-16-2024 |
-| Peer Review         | In-class peer review of 2 other teams.                                                                                                      | Whole Team                 | 11-13-2024 |
-| Data Mutation       | TBD                                                                                                                                         | Anudeep, Aditya, & Conner  | 11-13-2024 |
-| Data Visualizations | Create 4 plots based off our data analysis.                                                                                                 | Ravleen & Neha             | 11-13-2024 |
-| Write up            | Create a formal write up including an introduction, description of data sets, glimpses of data, and our questions, as well as our results.  | Remi, Ravleen, & Conner    | 12-10-2024 |
-| Presentation        | Create slides to present our findings in class.                                                                                             | Whole Team                 | 12-13-2024 |
-| Peer Review         | Do in-group peer reviews of team members individually.                                                                                      | Whole Team                 | 12-13-2024 |
+|                     | Task Description                                                                                                                           | Team Member               | Due Date   |
+|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|------------|
+| Acquiring Data Sets | Finding 3 data sets that meet project description.                                                                                         | Remi                      | 9-30-2024  |
+| Clean Data          | Remove/Replace NULL values. Normalize as needed. Change datatypes as needed.                                                               | Anudeep & Conner          | 11-13-2024 |
+| Questions           | Decide on 2 project questions.                                                                                                             | Whole Team                | 9-30-2024  |
+| Project Proposal    | Create a proposal including an introduction, description of data sets, glimpses of data, and our questions we seek to answer.              | Remi, Ravleen, & Anudeep  | 10-16-2024 |
+| Peer Review         | In-class peer review of 2 other teams.                                                                                                     | Whole Team                | 11-13-2024 |
+| Data Mutation       | TBD                                                                                                                                        | Anudeep, Aditya, & Conner | 11-13-2024 |
+| Data Visualizations | Create 4 plots based off our data analysis.                                                                                                | Ravleen & Neha            | 11-13-2024 |
+| Write up            | Create a formal write up including an introduction, description of data sets, glimpses of data, and our questions, as well as our results. | Remi, Ravleen, & Conner   | 12-10-2024 |
+| Presentation        | Create slides to present our findings in class.                                                                                            | Whole Team                | 12-13-2024 |
+| Peer Review         | Do in-group peer reviews of team members individually.                                                                                     | Whole Team                | 12-13-2024 |
 
 ## Accountability and Expectations Attendance Policy:
 

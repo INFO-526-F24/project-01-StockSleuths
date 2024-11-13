@@ -1,8 +1,8 @@
 ---
-title: "Project Title"
-subtitle: "INFO 526 - Fall 2024 - Project 01"
+title: "The Influence of Russia/Ukraine Conflict on US Economy"
+subtitle: "INFO 526 - Fall 2024 - Project - Stock Sleuths"
 author: 
-  - name: "Team name"
+  - name: "Stock Sleuths"
     affiliations:
       - name: "School of Information, University of Arizona"
 description: "Project description"
@@ -19,4 +19,6 @@ execute:
 
 ## Abstract
 
-Add project abstract here.
+This project analyzes the impact of the Russia-Ukraine conflict on the U.S. economy by examining key economic indicators: the S&P 500 index, inflation rates, and consumer sentiment. By leveraging historical data from 2014 to the present, we investigate how these metrics evolved before, during, and after the onset of the conflict. Through data cleaning, merging, and visualization, this analysis highlights shifts in U.S. economic conditions, providing insights into market volatility, consumer confidence, and inflation trends.
+
+Data from the S&P 500 offers a view of stock market performance, while inflation rates provide context for changes in purchasing power, and consumer sentiment captures public confidence in economic stability. Advanced visualization techniques, such as trend smoothing and color-coded plots, reveal the underlying patterns in these metrics, emphasizing significant changes. This project’s findings aim to inform understanding of the broader economic ripple effects of international conflict, shedding light on how global disruptions influence U.S. domestic markets and consumer sentiment.
