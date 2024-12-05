@@ -11,10 +11,10 @@ format:
     code-tools: true
     code-overflow: wrap
     embed-resources: true
-editor: visual
-execute:
-  warning: false
-  echo: false
+  editor: visual
+  execute:
+    warning: false
+    echo: false
 ---
 
 ## Introduction
@@ -79,7 +79,9 @@ sp500_data <- sp500_data |>
 
 # Preview cleaned data
 glimpse(sp500_data)
+summary(sp500_data)
 datatable(sp500_data)
+
 ```
 
 **Insight:** After cleaning, we have a dataset with `date` and `sp500_index` columns, making it easy to track stock market performance over time. The date formatting and column renaming help standardize the dataset for further analysis.
@@ -144,9 +146,61 @@ datatable(sentiment_data)
 
 **Insight:** The consumer sentiment data now includes a clean, numeric `consumer_sentiment` column, allowing us to track consumer confidence over time. This indicator often correlates with spending and investment behavior, making it a valuable measure for economic analysis.
 
+## Data set 4: Oil Price Data
+
+Oil price data is a critical indicator of economic dynamics, especially during geopolitical conflicts. This section loads, cleans, and analyzes oil data from multiple sheets in the Excel file.
+
+### Load and Inspect Oil Price Data
+
+```{r}
+# Define file path for the oil price data set
+file_path <- here("data", "pswrgvwall.xls")
+
+# List all sheet names
+sheet_names <- excel_sheets(file_path)
+
+# Exclude "Contents" sheet and merge the remaining data sheets
+oil_data <- map_dfr(sheet_names[!sheet_names %in% "Contents"], 
+                    ~ read_excel(file_path, sheet = .x, skip = 2))
+
+# Inspect the structure of the merged data
+names(oil_data)
+```
+
+### Cleaning and Transforming Data
+
+```{r}
+# Rename relevant columns and clean the data
+oil_data <- map_dfr(sheet_names[!sheet_names %in% "Contents"], 
+                    ~ read_excel(file_path, sheet = .x, skip = 2))
+
+# Select relevant columns
+oil_data <- oil_data |>
+  select(
+    date = `Date`, 
+    oil_price = `Weekly U.S. Regular Conventional Retail Gasoline Prices  (Dollars per Gallon)`
+  )
+
+# Rename columns for simplicity
+oil_data <- oil_data |>
+  clean_names() |>
+  mutate(
+    date = as.Date(date, format = "%Y-%m-%d"),
+    oil_price = as.numeric(oil_price)
+  ) |>
+  filter(!is.na(oil_price))  # Remove rows with missing oil prices
+
+# Preview the cleaned oil data
+# glimpse(oil_data)
+datatable(oil_data)
+
+# Save cleaned oil data
+write_csv(oil_data, here("data", "cleaned_oil_data.csv"))
+```
+
 ## Identifying Missing Values Across Data sets
 
-To ensure data quality, we summarize missing values across all data sets. This helps identify any gaps before merging and analyzing the data.
+To ensure data quality, we summarize missing values across all data cd sets. This helps identify any gaps before merging and analyzing the data.
 
 ```{r}
 # Missing values summary for each dataset
@@ -173,11 +227,11 @@ missing_summary
 datatable(missing_summary)
 ```
 
-**Insight:** By summarizing missing values, we can see if there are any gaps in the data. If significant gaps exist, we may need to address these before merging datasets to ensure our analysis remains accurate and representative.
+**Insight:** By summarizing missing values, we can see if there are any gaps in the data. If significant gaps exist, we may need to address these before merging data sets to ensure our analysis remains accurate and representative.
 
-## Merging the Datasets
+## Merging the Data sets
 
-Now that each dataset is cleaned, we merge them by the `date` column to create a comprehensive dataset for analysis.
+Now that each data set is cleaned, we merge them by the `date` column to create a comprehensive data set for analysis.
 
 ```{r}
 ## Merging the Datasets
@@ -198,7 +252,7 @@ skim(merged_data)
 
 ```
 
-**Insight:** The merged dataset combines the S&P 500 index, inflation rates, and consumer sentiment data, all aligned by date. This allows us to analyze the interplay between stock market trends, inflation, and consumer sentiment over time, providing a holistic view of economic dynamics.
+**Insight:** The merged data set combines the S&P 500 index, inflation rates, and consumer sentiment data, all aligned by date. This allows us to analyze the interplay between stock market trends, inflation, and consumer sentiment over time, providing a holistic view of economic dynamics.
 
 ### Saving the Merged Data
 
@@ -301,6 +355,44 @@ inflation_plot <- ggplot(inflation_data,
 inflation_plot
 
 
+```
+
+### **Visualization of Oil Prices**
+
+```{r}
+# Plot oil prices over time
+ggplot(oil_data, aes(x = date, y = oil_price)) +
+  geom_line(color = "#FF5733", size = 1) +
+  labs(
+    title = "U.S. Regular Gasoline Prices Over Time",
+    subtitle = "Weekly U.S. Regular Conventional Retail Gasoline Prices",
+    x = "Date",
+    y = "Price (USD per Gallon)"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    plot.subtitle = element_text(size = 12, face = "italic"),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  ) +
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+  geom_smooth(method = "loess", se = FALSE, color = "#1F78B4", size = 0.8)
+```
+
+### Descriptive analysis for oil prices
+
+```{r}
+# Calculate basic statistics for oil prices
+oil_stats <- oil_data |>
+  summarize(
+    mean_price = mean(oil_price, na.rm = TRUE),
+    median_price = median(oil_price, na.rm = TRUE),
+    sd_price = sd(oil_price, na.rm = TRUE),
+    min_price = min(oil_price, na.rm = TRUE),
+    max_price = max(oil_price, na.rm = TRUE)
+  )
+
+datatable(oil_stats)
 ```
 
 **Insight:**
