@@ -1,0 +1,161 @@
+---
+title: "Visuals"
+author: "Neha Chaudhari"
+editor: visual
+---
+## libraries
+```{r}
+#| label: Loading all libraries
+
+if (!require("pacman")) 
+  install.packages("pacman")
+
+# use this line for installing/loading
+pacman::p_load(readr,
+               dplyr,
+               readxl,
+               ggplot2)
+
+```
+## Merging all datasets together
+```{r}
+#| label: Cleaning and merging the data together
+
+#Stock market
+sp500_data <- read_csv('data/sp500_index.csv') 
+sp500_data$Date <- as.Date(sp500_data$Date, format = "%Y-%m-%d")
+sp500_data <- sp500_data |>
+  rename(DATE = Date)
+glimpse(sp500_data)
+
+
+#Oil prices
+# oil_data <- read_excel("data/pswrgvwall.xls", sheet = "Data 1", skip = 2)
+# oil_data <- oil_data |>
+#   select(1:2)
+# oil_data <- oil_data |>
+#   mutate(DATE = as.Date(Date)) |>  # Converting 'Date' (dttm) to 'Date' type
+#   select(-Date) |> # Removing the old 'Date' column
+#   rename("Oil prices" = "Weekly U.S. Regular Conventional Retail Gasoline Prices  (Dollars per Gallon)")
+
+oil_data <- read_csv('data/cleaned_oil_data.csv')
+oil_data <- oil_data |>
+  rename(DATE = date) 
+#str(oil_data)
+glimpse(oil_data) 
+
+# consumer sentiment
+sent_data <- read_csv('data/UMCSENT.csv')  
+sent_data$DATE <- as.Date(sent_data$DATE, format = "%Y-%m-%d")
+
+# inflaltion
+inflation_data <- read_csv('data/MICH.csv') 
+inflation_data$DATE <- as.Date(inflation_data$DATE, format = "%Y-%m-%d")
+
+# merged_data <- left_join(sent_data, inflation_data, by = 'DATE')
+# glimpse(merged_data)
+
+merged_data <- sp500_data |>
+  left_join(inflation_data, by = 'DATE') |>
+  left_join(oil_data, by = 'DATE') |>
+  left_join(sent_data, by = 'DATE')
+glimpse(merged_data)
+
+merged_data <- merged_data |>
+  mutate(UMCSENT = na_if(UMCSENT, "."))
+merged_data <- merged_data |>
+  filter(!is.na(UMCSENT) | !is.na(oil_price) | !is.na(`S&P500`))
+glimpse(merged_data)
+
+# View summary statistics
+# summary(merged_data)
+```
+## Box plot
+```{r}
+#| label:Creating Box plot
+
+plot_data <- merged_data |>
+  mutate(
+    HalfYear = ifelse(format(DATE, "%m") %in% c("01", "02", "03", "04", "05", "06"), 
+                      paste0(format(DATE, "%Y"), "-H1"), 
+                      paste0(format(DATE, "%Y"), "-H2")),  # Group by Half-Year
+    Quarter = format(DATE, "%Y-Q%q"),  # Quarterly grouping
+    UMCSENT = as.numeric(UMCSENT) 
+  ) |>
+  filter(!is.na(UMCSENT) & !is.na(`S&P500`)) 
+
+scaling_factor <- 100  # Adjust to fit S&P500 line more visibly alongside UMCSENT
+
+# Create the plot
+ggplot(plot_data, aes(x = HalfYear)) +
+   geom_boxplot(aes(y = UMCSENT, group = HalfYear), 
+                fill = "lightblue", color = "darkblue", alpha = 0.7) +  
+  geom_line(aes(y = `S&P500` / scaling_factor, group = 1, color = "S&P500"), size = 1) +  
+  scale_y_continuous(
+    name = "Consumer Sentiment (UMCSENT)",  # Primary y-axis
+    sec.axis = sec_axis(~ . * scaling_factor, name = "S&P500 Index")) +
+  labs(
+    title = "Consumer Sentiment vs. US Stock Market Performance (Grouped by Half-Year)",
+    x = "Half-Year",
+    color = "Legend" ) +
+  scale_color_manual(values = c("S&P500" = "red")) +  
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),  
+    axis.title.y.right = element_text(color = "red"))
+
+```
+## Line plot
+```{r}
+# Load necessary library for interpolation
+library(zoo)
+
+# Interpolate missing Oil prices values
+plot_data <- plot_data |>
+  mutate(oil_price = na.approx(oil_price , na.rm = FALSE))
+
+# Recalculate scaling factor
+scaling_factor <- max(plot_data$oil_price , na.rm = TRUE) / max(plot_data$MICH, na.rm = TRUE)
+
+#Create the plot
+ggplot(plot_data, aes(x = DATE)) +
+  geom_line(aes(y = oil_price , color = "Oil Prices"), size = 1.2) +  # Line for oil prices
+  geom_line(aes(y = MICH * scaling_factor, color = "Inflation"), size = 1.2) +
+  scale_y_continuous(
+    name = "Oil Prices (Dollars per Gallon)",  # Primary y-axis
+    sec.axis = sec_axis(~ . / scaling_factor, name = "Inflation Index (MICH)")) +
+  labs(
+    title = "Oil Prices vs. Inflation Over Time",
+    x = "Date",
+    color = "Legend" ) +
+  scale_color_manual(values = c("Oil Prices" = "blue", "Inflation" = "orange")) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    axis.title.y.right = element_text(color = "orange") )
+
+
+## Line plot Oil prices & S&P500
+# Calculate scaling factor to adjust S&P500 values to match Oil prices' scale
+scaling_factor <- max(plot_data$oil_price, na.rm = TRUE) / max(plot_data$`S&P500`, na.rm = TRUE)
+
+# Create the plot
+ggplot(plot_data, aes(x = DATE)) +
+  geom_line(aes(y = oil_price, color = "Oil Prices"), size = 1.2) +
+  geom_line(aes(y = `S&P500` * scaling_factor, color = "S&P500"), size = 1.2) +
+  scale_y_continuous(
+    name = "Oil Prices (Dollars per Gallon)",  # Primary y-axis label
+    sec.axis = sec_axis(~ . / scaling_factor, name = "S&P500 Index")  ) + # Secondary y-axis label
+  labs(
+    title = "Oil Prices vs. S&P500 Over Time",
+    x = "Date",
+    color = "Legend"
+  ) +
+  scale_color_manual(values = c("Oil Prices" = "blue", "S&P500" = "pink")) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),  # Rotate x-axis labels for clarity
+    axis.title.y.right = element_text(color = "pink") )
+
+
+```
