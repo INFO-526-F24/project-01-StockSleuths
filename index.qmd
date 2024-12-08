@@ -1,6 +1,6 @@
 ---
 title: "The Influence of Russia/Ukraine Conflict on US Economy"
-subtitle: "INFO 526 - Fall 2024 - Project 01"
+subtitle: "INFO 526 - Fall 2024 - Project - Stock Sleuths"
 author: 
   - name: "Stock Sleuths"
     affiliations:
@@ -18,9 +18,9 @@ execute:
 ---
 
 ## Abstract
-
 This study examines the economic impact of the Russia-Ukraine conflict on key U.S. indicators, specifically oil prices, stock market performance, consumer sentiment, and inflation expectations. Using time series data from the U.S. Energy Information Administration (EIA), Kaggle's S&P 500 data, and the Federal Reserve Economic Data (FRED), we assess trends from before the onset of the conflict in February 2022 to the present. Our analysis utilizes exploratory data analysis (EDA) and visualizations, including time series and distribution plots, to capture shifts and correlations across these variables in response to geopolitical pressures. We aim to uncover patterns indicating how U.S. markets and public sentiment have responded to the conflict, with a particular focus on the economic ripple effects of energy price volatility and market uncertainty. By analyzing these indicators over time, this study will provide insights into the complex ways in which global conflicts influence domestic economic stability and sentiment, informing a broader understanding of the impacts of international crises on the U.S. economy.
 
+<<<<<<< HEAD
 ```{r}
 
 sp500_index <- read_csv("data/sp500_index.csv")
@@ -55,3 +55,5 @@ ggplot(oil_filtered, aes(x = Date, y = OilPriceColumn)) +
   labs(title = "Oil Prices Trends Over Time", x = "Date", y = "Price")
 
 ```
+=======
+>>>>>>> d292b565eadbd4c911c50614887748e1c11de6cf
