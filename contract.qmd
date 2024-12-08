@@ -100,7 +100,7 @@ Decisions will be made by consensus; if a consensus cannot be reached, a vote wi
 ### Task Assignments :
 
 |                     | Task Description                                                                                                                           | Team Member               | Due Date   |
-|--------------|-------------------------------|--------------|--------------|
+|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|------------|
 | Acquiring Data Sets | Finding 3 data sets that meet project description.                                                                                         | Remi                      | 9-30-2024  |
 | Clean Data          | Remove/Replace NULL values. Normalize as needed. Change datatypes as needed.                                                               | Anudeep & Conner          | 11-13-2024 |
 | Questions           | Decide on 2 project questions.                                                                                                             | Whole Team                | 9-30-2024  |

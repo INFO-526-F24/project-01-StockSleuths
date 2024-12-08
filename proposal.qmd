@@ -126,8 +126,4 @@ Our project focuses on analyzing the economic impact of the Russia/Ukraine confl
 
 ## Citations
 
-Dataset 1: US Stock Market Data from Kaggle, sp500_stocks.csv <https://www.kaggle.com/datasets/andrewmvd/sp-500-stocks>
-Dataset 2: EIA data pswrgvwall.xls <https://www.eia.gov/petroleum/gasdiesel/>
-Dataset 3: Consumer Sentiment & Inflation data from FRED umcsent.csv and MICH.csv  <https://fred.stlouisfed.org/series/UMCSENT> <https://fred.stlouisfed.org/series/MICH>
-
-
+Dataset 1: US Stock Market Data from Kaggle, sp500_stocks.csv <https://www.kaggle.com/datasets/andrewmvd/sp-500-stocks> Dataset 2: EIA data pswrgvwall.xls <https://www.eia.gov/petroleum/gasdiesel/> Dataset 3: Consumer Sentiment & Inflation data from FRED umcsent.csv and MICH.csv <https://fred.stlouisfed.org/series/UMCSENT> <https://fred.stlouisfed.org/series/MICH>

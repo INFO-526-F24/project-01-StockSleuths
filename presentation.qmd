@@ -23,7 +23,8 @@ execute:
 # Load packages here
 pacman::p_load(tidymodels,
                tidyverse, 
-               kableExtra)
+               kableExtra, 
+               readxl)
 
 ```
 
