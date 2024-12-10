@@ -402,3 +402,41 @@ datatable(oil_stats)
 2.  **Consumer Sentiment Trends**: The consumer sentiment plot reflects changes in consumer confidence, with potential dips during economic downturns.
 
 3.  **Inflation Rate Trends**: The inflation plot shows trends in inflation rates, which may spike during periods of economic stress.
+
+```{r}
+view(oil)
+sp500_index <- read_csv("data/sp500_index.csv")
+
+# For S&P 500 Data
+sp500_index$Date <- as.Date(sp500_index$Date, format = "%Y-%m-%d")
+
+# For Oil Data
+oil <- read_csv("data/cleaned_oil_data.csv")
+oil$date <- as.Date(oil$date, format = "%Y-%m-%d")
+
+sum(is.na(sp500_index$`S&P500`))
+sum(is.na(oil$oil_price))
+
+start_date <- as.Date("2022-01-03") 
+end_date <- as.Date("2023-01-02")
+
+sp500_filtered <- sp500_index %>%
+  filter(Date >= start_date & Date <= end_date)
+
+oil_filtered <- oil %>%
+  filter(Date >= start_date & Date <= end_date)
+view(oil_filtered)
+sp500_filtered <- na.omit(sp500_filtered)
+oil_filtered <- na.omit(oil_filtered)
+
+# Plot for S&P 500
+ggplot(sp500_filtered, aes(x = Date, y = `S&P500`)) +
+  geom_line(color = "blue") +
+  labs(title = "S&P 500 Trends Over Time", x = "Date", y = "Index Value")
+
+# Plot for Oil Prices
+ggplot(oil_filtered, aes(x = Date, y = OilPriceColumn)) +
+  geom_line(color = "red") +
+  labs(title = "Oil Prices Trends Over Time", x = "Date", y = "Price")
+
+```
