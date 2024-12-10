@@ -14,7 +14,8 @@ if (!require("pacman"))
 pacman::p_load(readr,
                dplyr,
                readxl,
-               ggplot2)
+               ggplot2,
+               plotly)
 
 ```
 ## Merging all datasets together
@@ -72,7 +73,7 @@ glimpse(merged_data)
 ```
 ## Box plot
 ```{r}
-#| label:Creating Box plot
+#| label: Creating Box plot
 
 plot_data <- merged_data |>
   mutate(
@@ -87,7 +88,7 @@ plot_data <- merged_data |>
 scaling_factor <- 100  # Adjust to fit S&P500 line more visibly alongside UMCSENT
 
 # Create the plot
-ggplot(plot_data, aes(x = HalfYear)) +
+plot <- ggplot(plot_data, aes(x = HalfYear)) +
    geom_boxplot(aes(y = UMCSENT, group = HalfYear), 
                 fill = "lightblue", color = "darkblue", alpha = 0.7) +  
   geom_line(aes(y = `S&P500` / scaling_factor, group = 1, color = "S&P500"), size = 1) +  
@@ -103,6 +104,10 @@ ggplot(plot_data, aes(x = HalfYear)) +
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1),  
     axis.title.y.right = element_text(color = "red"))
+
+# int_plot <- ggplotly()
+# 
+# int_plot
 
 ```
 ## Line plot
@@ -140,7 +145,7 @@ ggplot(plot_data, aes(x = DATE)) +
 scaling_factor <- max(plot_data$oil_price, na.rm = TRUE) / max(plot_data$`S&P500`, na.rm = TRUE)
 
 # Create the plot
-ggplot(plot_data, aes(x = DATE)) +
+plot_2 <- ggplot(plot_data, aes(x = DATE)) +
   geom_line(aes(y = oil_price, color = "Oil Prices"), size = 1.2) +
   geom_line(aes(y = `S&P500` * scaling_factor, color = "S&P500"), size = 1.2) +
   scale_y_continuous(
@@ -157,5 +162,7 @@ ggplot(plot_data, aes(x = DATE)) +
     axis.text.x = element_text(angle = 45, hjust = 1),  # Rotate x-axis labels for clarity
     axis.title.y.right = element_text(color = "pink") )
 
+int_plot_2 <- ggplotly()
 
+int_plot_2
 ```
