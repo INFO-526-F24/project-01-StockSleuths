@@ -132,7 +132,7 @@ int_box
 # Rescale oil prices to match the range of Consumer Sentiment (UMCSENT)
 scale_factor_oil <- max(plot_data$UMCSENT, na.rm = TRUE) / max(plot_data$oil_price, na.rm = TRUE)
 
-ggplot(plot_data, aes(x = factor(format(DATE, "%Y")), y = UMCSENT)) +
+int_box_2 <- ggplot(plot_data, aes(x = factor(format(DATE, "%Y")), y = UMCSENT)) +
   geom_boxplot(fill = "lightblue", outlier.color = "deeppink3", outlier.size = 1.5) +
   geom_smooth(aes(y = oil_price * scale_factor_oil, group = 1), method = "loess", color = "darkgreen", linetype = "dashed", size = 1, se = FALSE) +
   labs(
@@ -145,6 +145,9 @@ ggplot(plot_data, aes(x = factor(format(DATE, "%Y")), y = UMCSENT)) +
   theme(
     panel.border = element_rect(color = "black", fill = NA, size = 0.8),
     axis.text.x = element_text(angle = 45, hjust = 1))
+
+int_box_2 <- ggplotly()
+int_box_2
 
 
 ```
