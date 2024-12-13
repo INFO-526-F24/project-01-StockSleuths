@@ -20,3 +20,117 @@ execute:
 ## Abstract
 
 This study examines the economic impact of the Russia-Ukraine conflict on key U.S. indicators, specifically oil prices, stock market performance, consumer sentiment, and inflation expectations. Using time series data from the U.S. Energy Information Administration (EIA), Kaggle's S&P 500 data, and the Federal Reserve Economic Data (FRED), we assess trends from before the onset of the conflict in February 2022 to the present. Our analysis utilizes exploratory data analysis (EDA) and visualizations, including time series and distribution plots, to capture shifts and correlations across these variables in response to geopolitical pressures. We aim to uncover patterns indicating how U.S. markets and public sentiment have responded to the conflict, with a particular focus on the economic ripple effects of energy price volatility and market uncertainty. By analyzing these indicators over time, this study will provide insights into the complex ways in which global conflicts influence domestic economic stability and sentiment, informing a broader understanding of the impacts of international crises on the U.S. economy.
+
+## **Introduction**
+
+The motivation for this analysis centers on understanding the impact of the Russia-Ukraine conflict on key U.S. economic indicators, with a specific focus on oil prices, stock market trends, consumer sentiment, and inflation expectations. The research seeks to address how stock market trends and oil prices have changed since the onset of the conflict, and how consumer sentiment, stock trends, oil prices, and inflation expectations have shifted over time throughout the conflict. By exploring these questions, the analysis aims to shed light on the broader economic ripple effects of geopolitical instability, providing valuable insights for policymakers, businesses, and investors.
+
+### Questions 
+
+Question 1: How have US Stock Market trends and oil prices changed since the beginning of the Russia/Ukraine Conflict?
+
+Question 2: How has consumer sentiment, stock trends, oil prices, and inflation expectations changed over time during the Russia/Ukraine conflict?
+
+###  Data
+
+We leveraged three key datasets: U.S. crude oil price data from the U.S. Energy Information Administration (EIA), S&P 500 stock market data from Kaggle, and consumer sentiment data and inflation expectation data merged into one set from the Federal Reserve Economic Data (FRED). These datasets provide valuable insights into how key economic indicators have changed during the conflict, allowing for a thorough analysis of potential patterns and relationships. However, it's important to acknowledge potential biases that could influence the results. For example, consumer sentiment data might reflect demographic imbalances based on how it was collected, especially if certain population groups are underrepresented. Details on the datasets can be found the table below:
+
+| Dataset                                                | Key Variables                                                               | Description                                                                                                                                                                                               | Purpose                                                                                                                                     | Source                                            |
+|---------------|---------------|---------------|---------------|---------------|
+| **S&P 500 Stock Market Data**                          | Date, S&P 500 Index                                                         | Daily updates on S&P 500 performance from 2010 to present, tracking 500 U.S. companies. Used to analyze market volatility from geopolitical events.                                                       | Track fluctuations in U.S. stock market performance to evaluate volatility linked to geopolitical events.                                   | Kaggle (sp500_stocks.csv)                         |
+| **U.S. Crude Oil Prices (EIA)**                        | Weekly crude oil prices by region (U.S. average, Midwest, Gulf Coast, etc.) | Historical U.S. crude oil prices from the 1990s to present, tracking price changes by region. Used to assess oil price shifts caused by global supply chain disruptions from the Russia-Ukraine conflict. | Monitor oil price changes driven by global supply chain disruptions during the Russia-Ukraine conflict.                                     | U.S. Energy Information Administration (EIA)      |
+| **Consumer Sentiment & Inflation Expectations (FRED)** | Consumer sentiment index, Inflation expectations                            | Monthly data on consumer sentiment and inflation expectations from February 2022 to present. Used to analyze shifts in public confidence and inflation expectations during the Russia-Ukraine conflict.   | Analyze changes in consumer sentiment and inflation expectations in response to economic uncertainty caused by the Russia-Ukraine conflict. | Federal Reserve Economic Data (FRED) Merged Sets  |
+
+### Data Cleaning & Processing
+
+The data cleaning and preprocessing phase was carefully designed to ensure the datasets were consistent, accurate, and ready for analysis. First, the S&P 500 dataset was standardized by formatting the date column and renaming columns to improve clarity and align with other datasets. A similar process was applied to the inflation and consumer sentiment merged datasets, creating a uniform structure across all sources for easier integration. For the oil price data, which was initially spread across multiple Excel sheets, all sheets were consolidated into one dataset. From this merged dataset, we selected "Weekly U.S. Regular Conventional Retail Gasoline Prices (Dollars per Gallon)" as the primary metric, focusing on a representative indicator of oil price trends.
+
+Once the individual datasets were cleaned, they were merged by the date column to create a comprehensive dataset that included the S&P 500 index, inflation rates, and consumer sentiment. This merging step allowed us to analyze relationships and patterns across these economic indicators over time, providing a holistic view of their interdependencies.
+
+To maintain data integrity, rows containing missing values (NA) were removed from all datasets to avoid distortions in the analysis. Column names were also standardized across all datasets to ensure consistency and make the data more interpretable. The final cleaned and merged dataset was saved as a CSV file, making it ready for exploration and ensuring the entire process could be easily reproduced. Full details of the cleaning and merging process, including specific transformations and code, are documented in the code.qmd file for complete transparency.\
+\
+The exploratory data analysis (EDA) focused on examining trends and relationships between variables central to our research questions: oil prices, stock market trends (S&P 500), consumer sentiment, and inflation expectations. Through a combination of visualizations and summary statistics, the EDA provided valuable insights into these economic indicators. This EDA process provided an essential foundation for identifying relationships and patterns in the data, setting the stage for deeper analysis and interpretation of the economic indicators. Additionally, descriptive statistics were calculated for oil prices, providing key insights into the central tendency and variability of prices. Metrics such as mean, median, standard deviation, minimum, and maximum values were summarized to offer a clear overview of oil price distributions.
+
+## Methodology 
+
+To address Question 1, the analysis focused on visualizing trends in U.S. crude oil prices and the S&P 500 index over time using time series plots. These visualizations highlight fluctuations in key economic indicators before, during, and after the onset of the Russia-Ukraine conflict. A scatter plot was also employed to explore potential correlations between oil prices and stock prices, providing insight into how these two variables may influence one another.
+
+For Question 2, line plots were used to track trends in consumer sentiment, inflation expectations, stock prices, and oil prices, allowing for a clear comparison of shifts in these variables in response to the conflict. Box plots illustrated the distribution of consumer sentiment across distinct time periods, particularly pre- and post-conflict, shedding light on changes in public confidence due to geopolitical instability.
+
+The animated time series plot of oil prices and the S&P 500 index (rescaled for comparison) highlighted key trends from 2021 to 2023, with the conflict period marked in gray. This visualization emphasized oil price volatility, stock market reactions, and the broader economic impact of the conflict. Similarly, the box plot of consumer sentiment and rescaled oil prices (featuring a smoothed loess line) from 2020 to 2024 provided insights into shifts in sentiment, with interactive features allowing users to explore metrics such as medians, quartiles, and outliers. An animated line plot comparing trends in inflation and the S&P 500 index from early 2021 to late 2023 further demonstrated dynamic changes over time, with moving points highlighting inflection points and major shifts.
+
+These visualizations were carefully chosen to align with the research questions and data structure. Time series plots effectively depict longitudinal trends, while scatter plots highlight relationships between variables. Box plots reveal shifts in distribution and behavior, offering insights into consumer sentiment and inflation during the conflict. The use of animation and interactivity enhances the storytelling aspect, enabling deeper exploration of specific data points and relationships. This thoughtful combination of techniques ensures a comprehensive and intuitive understanding of the impact of the Russia-Ukraine conflict on U.S. economic indicators.
+
+## Results
+
+#### Question 1
+
+#### 📈 Oil Prices: Spiked in early 2022 due to supply disruptions, fluctuating through 2023. 📉 S&P 500: Volatile, with sharp declines in early 2022 and partial recoveries later. 🔗 Correlation: Oil price spikes coincided with stock market downturns, showing financial impact.
+
+#### Question 2
+
+📊 Consumer Sentiment: Dropped significantly during the conflict, reflecting economic worries.\
+🔥 Inflation: Climbed steadily, peaking during the conflict as oil prices soared.\
+🔍 Visual Insights: Trends reveal oil price shifts influenced both public sentiment and market performance.
+
+#### Animated Time Series Line Plot: Trends in Oil Prices and S&P 500 (2021–2023)
+
+This animated plot highlights significant trends in oil prices and the S&P 500 index, emphasizing the influence of the Russia-Ukraine conflict on these key economic indicators. Oil prices steadily increased before the conflict, peaking sharply around February 2022. This peak reflects global supply chain disruptions and reduced exports from Russia due to sanctions. Post-peak, oil prices declined, indicating adjustments in global markets, potentially through alternative supply strategies.
+
+The S&P 500 index exhibited marked volatility during this period, with notable downturns coinciding with oil price spikes. This suggests market instability driven by heightened energy costs and geopolitical uncertainty. Despite moments of recovery, stock market fluctuations persisted, reflecting long-term economic concerns. These observations underscore how the conflict disrupted energy markets and amplified stock market instability, directly addressing Research Question 1 by linking geopolitical events to economic trends.
+
+#### Interactive Box Plot: Consumer Sentiment and Oil Prices Over Time (2020–2024)
+
+This plot illustrates the interplay between consumer sentiment (box plots) and rescaled oil prices (smoothed green line). Consumer sentiment displayed significant fluctuations, with higher values in 2020 and early 2021, followed by a notable decline during the conflict in 2022. This drop likely reflects public concerns about rising costs and economic uncertainty.
+
+Oil prices, represented by the smoothed line, show a steep rise peaking in 2022 before steadily declining. The inverse relationship between oil prices and consumer sentiment during the conflict is evident—higher oil prices correlate with lower public confidence. By 2024, consumer sentiment begins to recover but remains below pre-conflict levels, indicating lingering economic apprehensions. These findings directly address Research Question 2, showcasing how geopolitical instability influenced consumer sentiment and energy markets.
+
+#### Scatter Plot: Relationship Between Oil Prices and S&P 500 Prices (2022)
+
+The scatter plot visualizes the relationship between oil prices and the S&P 500 index during 2022, revealing a slight negative correlation. The trend line indicates that increases in oil prices were generally associated with declines in the stock market. However, the scattered data points highlight significant variability, suggesting that factors beyond oil prices also influenced market performance.
+
+This relationship aligns with broader economic dynamics, where rising oil prices—linked to geopolitical tensions—raised production costs and dampened investor confidence. The plot provides a visual connection to Research Question 1 by emphasizing the interplay between energy markets and stock market trends during the conflict.
+
+#### Animated Line Plot: S&P 500 and Inflation Trends During the Conflict (2021–2023)
+
+This plot captures the evolution of the S&P 500 index and inflation trends during the conflict. The stock market initially showed gradual growth, but volatility intensified after the conflict began, with periodic dips corresponding to geopolitical uncertainty. Inflation trends sharply increased leading up to and during the conflict, peaking shortly after its onset, likely driven by energy market disruptions and supply chain challenges.
+
+Post-peak, inflation began to stabilize, though it remained elevated, reflecting persistent economic pressures. The stock market, in contrast, continued to exhibit volatility, signaling sustained investor uncertainty. This visualization supports Research Question 2 by highlighting how the conflict influenced inflation expectations and stock market performance, revealing the interconnectedness of these variables during a period of instability.
+
+## Discussion
+
+The analysis provided valuable insights into how the Russia-Ukraine conflict impacted key U.S. economic indicators, including stock market trends, oil prices, consumer sentiment, and inflation expectations. Each visualization shed light on specific aspects of these dynamics, addressing the research questions and painting a clearer picture of the economic ripple effects caused by geopolitical instability.For RQ1, which investigated changes in U.S. stock market trends and oil prices:
+
+-   The animated time series plot revealed sharp oil price spikes in early 2022, coinciding with the onset of the conflict. These disruptions were likely driven by sanctions on Russian exports and broader supply chain instability. This visualization emphasized the direct influence of the conflict on energy markets and, indirectly, on the broader economy.
+
+-   The S&P 500 exhibited notable volatility during the same period. Declines in the stock market were closely aligned with oil price surges, reflecting investor concerns over rising production costs and inflation. The scatter plot further supported this observation, showing a weak but clear negative correlation between oil prices and the S&P 500 index. This indicates that as energy costs rose, market performance suffered, underlining the interconnections of energy markets and financial stability.
+
+For RQ2, which examined shifts in consumer sentiment, stock market trends, oil prices, and inflation:
+
+-   The interactive box plot demonstrated a significant decline in consumer sentiment during the conflict period, likely fueled by inflationary pressures and economic uncertainty. The inverse relationship between rising oil prices and falling sentiment was particularly pronounced, highlighting the economic burden placed on households.
+
+-   Inflation, as visualized in the animated line plot, surged in early 2022, reflecting rising costs tied to energy markets and supply chain disruptions. While inflation began to stabilize later, its impact on consumer confidence and market volatility persisted, emphasizing the long-term effects of geopolitical instability on economic dynamics.
+
+These findings highlight the cascading economic risks of geopolitical conflicts. Rising oil prices acted as a catalyst, driving inflation and reducing consumer confidence, which, in turn, contributed to stock market instability. Policymakers and businesses must closely monitor such interconnected variables to better anticipate and mitigate economic shocks in the future.
+
+### Limitations
+
+Despite the valuable insights gained, the analysis faced several limitations. Data quality and coverage posed challenges, as missing values in consumer sentiment and inflation data required imputation, which may have introduced biases. Additionally, the oil price data, while comprehensive, focused on a single metric, potentially limiting the scope of the analysis. Another limitation was the inability to establish causation from the observed correlations. 
+
+While the visualizations highlighted relationships between oil prices, stock trends, and consumer sentiment, other factors, such as monetary policy or global economic conditions, may have also influenced the observed trends. Lastly, the granularity of the analysis was limited; the time series and scatter plots captured broad trends but may have missed more nuanced dynamics, such as sector-specific stock market reactions or demographic variations in sentiment.
+
+### Future Research
+
+To address these limitations and expand the current findings, several areas for future research are proposed. Incorporating additional variables, such as unemployment rates, wage growth, or sector-specific stock indices, could provide a more comprehensive understanding of the conflict’s economic impact. Exploring demographic variations in consumer sentiment and inflation expectations could uncover disparities in how different groups were affected economically. Advancing visualization techniques, such as developing interactive dashboards or heatmaps, could enable more granular exploration of trends and patterns across specific time periods or regions. Finally, employing statistical or machine learning models to establish causal links between oil prices, inflation, and stock trends could validate the findings and deepen the analysis, offering a clearer understanding of the underlying relationships.
+
+In conclusion, the visualizations effectively captured the interconnectedness of economic indicators during the Russia-Ukraine conflict, underscoring the profound impact of geopolitical events on domestic markets and public sentiment. While the findings provide actionable insights, addressing the limitations and exploring additional dimensions could further enhance understanding and inform policy responses to future global crises.\
+
+## References
+
+Dataset 1: US Stock Market Data from Kaggle, sp500_stocks.csv <https://www.kaggle.com/datasets/andrewmvd/sp-500-stocks> 
+
+Dataset 2: EIA data pswrgvwall.xls <https://www.eia.gov/petroleum/gasdiesel/> 
+
+Dataset 3: Consumer Sentiment & Inflation data from FRED umcsent.csv and MICH.csv <https://fred.stlouisfed.org/series/UMCSENT><https://fred.stlouisfed.org/series/MICH>​​
+
+\
