@@ -11,8 +11,8 @@ format:
     code-tools: true
     code-overflow: wrap
     embed-resources: true
-  editor: visual
-  execute:
+editor: visual
+execute:
     warning: false
     echo: false
 ---
@@ -31,7 +31,7 @@ The datasets include:
 
 3\. **Consumer Sentiment Data**: Monthly consumer sentiment data reflecting consumer confidence in the economy, from 1952 to present.
 
-# Setup
+## Setup
 
 ```{r}
 if (!require("pacman")) 
@@ -50,14 +50,19 @@ pacman::p_load(tidyverse,
                janitor,
                readxl,
                scales, 
-               gganimate)
+               plotly,
+               gganimate,
+               magick,
+               gifski, 
+               transformr, 
+               av)
 
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
-# Data Cleaning
+## Data Cleaning
 
-## Data set 1: S&P 500 Index Data
+### Data set 1: S&P 500 Index Data
 
 The S&P 500 data set contains daily historical values for the S&P 500, a key stock market index that tracks the performance of 500 large U.S. companies.
 
@@ -269,117 +274,7 @@ write_csv(merged_data, here("data", "merged_economic_indicators.csv"))
 
 We visualize each indicator over time to observe trends and identify any interesting patterns or potential correlations.
 
-### S&P 500 Index Over Time
-
-```{r}
-sp500_plot <- ggplot(sp500_data, 
-                     aes(x = date, 
-                         y = sp500_index)) +
-  geom_line(color = "#1f77b4", size = 1) +
-  labs(
-    title = "S&P 500 Index Over Time",
-    subtitle = "Daily performance of the S&P 500 index from 2014 to present",
-    x = "Date",
-    y = "S&P 500 Index Value"
-  ) +
-  theme_minimal() +
-  theme(
-    plot.title = element_text(size = 16, face = "bold"),
-    plot.subtitle = element_text(size = 12, face = "italic"),
-    axis.text.x = element_text(angle = 45, hjust = 1)
-  ) +
-  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
-  geom_smooth(
-    method = "loess",
-    se = FALSE,
-    color = "#ff7f0e",
-    size = 0.8
-  )
-sp500_plot
-```
-
-### Consumer Sentiment Over Time
-
-```{r}
-sentiment_plot <- ggplot(sentiment_data, 
-                         aes(x = date, 
-                             y = consumer_sentiment)) +
-  geom_line(color = "#2ca02c", size = 1) +
-  labs(
-    title = "Consumer Sentiment Over Time",
-    subtitle = "Monthly consumer sentiment index from 1952 to present",
-    x = "Date",
-    y = "Consumer Sentiment Index"
-  ) +
-  theme_minimal() +
-  theme(
-    plot.title = element_text(size = 16, face = "bold"),
-    plot.subtitle = element_text(size = 12, face = "italic"),
-    axis.text.x = element_text(angle = 45, hjust = 1)
-  ) +
-  scale_x_date(date_breaks = "5 years", date_labels = "%Y") +
-  geom_smooth(
-    method = "loess",
-    se = FALSE,
-    color = "#d62728",
-    size = 0.8
-  )
-sentiment_plot
-
-```
-
-### Inflation Rate Over Time
-
-```{r}
-inflation_plot <- ggplot(inflation_data,
-                         aes(x = date, 
-                             y = inflation_rate)) +
-  geom_line(color = "#D32F2F", size = 1) +  # Deep red for boldness and visibility
-  labs(
-    title = "Inflation Rate Over Time",
-    subtitle = "Monthly U.S. inflation rate from 1978 to present",
-    x = "Date",
-    y = "Inflation Rate (%)"
-  ) +
-  theme_minimal() +
-  theme(
-    plot.title = element_text(size = 16, face = "bold"),
-    plot.subtitle = element_text(size = 12, face = "italic"),
-    axis.text.x = element_text(angle = 45, hjust = 1)
-  ) +
-  scale_x_date(date_breaks = "5 years", date_labels = "%Y") +
-  geom_smooth(
-    method = "loess",
-    se = FALSE,
-    color = "black",
-    size = 0.8
-  )  # Golden yellow for a complementary contrast
-inflation_plot
-
-
-```
-
 ### **Visualization of Oil Prices**
-
-```{r}
-# Plot oil prices over time
-ggplot(oil_data, aes(x = date, y = oil_price)) +
-  geom_line(color = "#FF5733", size = 1) +
-  labs(
-    title = "U.S. Regular Gasoline Prices Over Time",
-    subtitle = "Weekly U.S. Regular Conventional Retail Gasoline Prices",
-    x = "Date",
-    y = "Price (USD per Gallon)"
-  ) +
-  theme_minimal() +
-  theme(
-    plot.title = element_text(size = 16, face = "bold"),
-    plot.subtitle = element_text(size = 12, face = "italic"),
-    axis.text.x = element_text(angle = 45, hjust = 1)
-  ) +
-  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
-  geom_smooth(method = "loess", se = FALSE, color = "#1F78B4", size = 0.8)
-```
 
 ### Descriptive analysis for oil prices
 
@@ -397,57 +292,15 @@ oil_stats <- oil_data |>
 datatable(oil_stats)
 ```
 
-**Insight:**
+### Data Visualization
 
-1.  **S&P 500 Trends**: The S&P 500 line plot shows fluctuations in stock market performance, highlighting periods of market volatility or growth.
-
-2.  **Consumer Sentiment Trends**: The consumer sentiment plot reflects changes in consumer confidence, with potential dips during economic downturns.
-
-3.  **Inflation Rate Trends**: The inflation plot shows trends in inflation rates, which may spike during periods of economic stress.
+#### Oil Prices vs S&P 500 Stock Analysis:
 
 ```{r}
-view(oil)
-sp500_index <- read_csv("data/sp500_index.csv")
-
-# For S&P 500 Data
-sp500_index$Date <- as.Date(sp500_index$Date, format = "%Y-%m-%d")
-
-# For Oil Data
-oil <- read_csv("data/cleaned_oil_data.csv")
+oil <- read_csv(here("data","cleaned_oil_data.csv"))
 oil$date <- as.Date(oil$date, format = "%Y-%m-%d")
 
-sum(is.na(sp500_index$`S&P500`))
-sum(is.na(oil$oil_price))
-
-start_date <- as.Date("2022-01-03") 
-end_date <- as.Date("2023-01-02")
-
-sp500_filtered <- sp500_index %>%
-  filter(Date >= start_date & Date <= end_date)
-
-oil_filtered <- oil %>%
-  filter(Date >= start_date & Date <= end_date)
-view(oil_filtered)
-sp500_filtered <- na.omit(sp500_filtered)
-oil_filtered <- na.omit(oil_filtered)
-
-# Plot for S&P 500
-ggplot(sp500_filtered, aes(x = Date, y = `S&P500`)) +
-  geom_line(color = "blue") +
-  labs(title = "S&P 500 Trends Over Time", x = "Date", y = "Index Value")
-
-# Plot for Oil Prices
-ggplot(oil_filtered, aes(x = Date, y = OilPriceColumn)) +
-  geom_line(color = "red") +
-  labs(title = "Oil Prices Trends Over Time", x = "Date", y = "Price")
-
-```
-
-```{r}
-oil <- read_csv("data/cleaned_oil_data.csv")
-oil$date <- as.Date(oil$date, format = "%Y-%m-%d")
-
-sp500_index <- read_csv("data/sp500_index.csv")
+sp500_index <- read_csv(here("data","sp500_index.csv"))
 sp500_index$Date <- as.Date(sp500_index$Date, format = "%Y-%m-%d")
 
 sp500_index <- sp500_index |>
@@ -471,25 +324,346 @@ ggplot(data = merged_data, aes(x = oil_price, y = `S&P500`)) +
   theme_minimal()
 ```
 
+##### Observations:
+
+The scatter plot shows the relationship between oil prices and S&P 500 prices for the year 2022. The trend line in the graph suggests a negative correlation, meaning that as oil prices increase, S&P 500 prices tend to decrease. However, the points on the graph are quite spread out, which means the relationship is not very strong or consistent. This could indicate that while oil prices might have some impact on the S&P 500, there are likely other factors at play, such as changes in the economy, interest rates, or global events. Overall, the graph shows that there might be a slight connection between oil prices and stock performance, but it’s not strong enough to say one directly causes the other.
+
+#### Oil Prices and S&P500 Trends from 2021 to 2023.
+
 ```{r}
+oil <- read_csv("data/cleaned_oil_data.csv")
+sp500 <- read_csv("data/sp500_index.csv")
+
+start_date <- as.Date("2021-01-01")
+end_date <- as.Date("2023-01-01")
+
+oil_filtered <- oil %>%
+  filter(date >= start_date & date <= end_date)
+
+sp500_filtered <- sp500 %>%
+  filter(Date >= start_date & Date <= end_date)
+
+oil_filtered <- oil_filtered %>%
+  rename(Date = date)
+
+sp500_filtered <- sp500_filtered %>%
+  rename(SP500 = `S&P500`)
+
+combined_data <- oil_filtered %>%
+  inner_join(sp500_filtered, by = "Date") %>%
+  select(Date, oil_price, SP500)
+
+combined_data$Date <- as.Date(combined_data$Date, format = "%Y-%m-%d")
+combined_data <- combined_data %>%
+  filter(!is.na(Date) & !is.na(oil_price) & !is.na(SP500))
+
+highlight_period <- data.frame(
+  xmin = as.Date("2022-02-24"),
+  xmax = as.Date("2022-03-31"),
+  ymin = -Inf,  # Extends shading to bottom of the plot
+  ymax = Inf    # Extends shading to top of the plot
+)
+
+# Rescale oil_price to match SP500 range
+combined_data <- combined_data %>%
+  mutate(oil_price_rescaled = oil_price * (max(SP500) / max(oil_price)))
+
+animated_plot <- ggplot(combined_data, aes(x = Date)) +
+  geom_rect(
+    data = highlight_period,
+    aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
+    fill = "lightgray", alpha = 0.3, inherit.aes = FALSE) +
+  geom_line(aes(y = oil_price_rescaled, color = "Oil Prices"), size = 1) +
+  geom_line(aes(y = SP500, color = "S&P 500"), size = 1) +
+  geom_point(aes(y = oil_price_rescaled, color = "Oil Prices"), size = 2, alpha = 0.7) +
+  geom_point(aes(y = SP500, color = "S&P 500"), size = 2, alpha = 0.7) + 
+  scale_color_manual(values = c("Oil Prices" = "red", "S&P 500" = "blue")) +
+  labs(title = "Oil Prices and S&P 500 Trends from 2021 Until 2023",
+       x = "Date", y = "Price", color = NULL ) +
+  theme_minimal() +
+  scale_x_date(date_labels = "%b %Y", 
+               date_breaks = "5 months") + 
+  transition_reveal(Date) +
+  ease_aes('cubic-in-out') + 
+  annotate("text", 
+         x = as.Date("2022-03-10"), 
+         y = min(combined_data$SP500, na.rm = TRUE) - 200, # Inside shaded area
+         label = "Period of Conflict", 
+         color = "black", size = 5, fontface = "italic", angle = 90) + 
+  annotate("text",
+  x = max(combined_data$Date) - 30,  
+  y = min(combined_data$oil_price_rescaled),  
+  label = "Oil Prices Rescaled for Comparison",
+  color = "red",
+  size = 2.5,
+  hjust = 1) + 
+  theme(
+    plot.title = element_text(size = 8),
+    axis.title.x = element_text(size = 8),  
+    axis.title.y = element_text(size = 8),  
+    axis.text.x = element_text(size = 8),   
+    axis.text.y = element_text(size = 8),
+    legend.position = "bottom",
+    legend.text = element_text(size = 8)
+  )
+
+# animate(animated_plot, nframes = 300, fps = 20, width = 800, height = 600, renderer = av_renderer(videos/animated_time_series_q1.mp4"))
+# Render and save the animation as a GIF
+animate(animated_plot, renderer = gifski_renderer("images/stocks_vs_oil.gif"), height = 600, width = 800, units = "px", duration = 10, fps = 20)
+
+```
+
+#### Consumer Sentiment and Oil price trends over time
+
+```{r}
+#| label: Cleaning and merging the data together
+
+#Stock market
+sp500_data <- read_csv('data/sp500_index.csv') 
+sp500_data$Date <- as.Date(sp500_data$Date, format = "%Y-%m-%d")
+sp500_data <- sp500_data |>
+  rename(DATE = Date)
+glimpse(sp500_data)
+
+oil_data <- read_csv('data/cleaned_oil_data.csv')
+oil_data <- oil_data |>
+  rename(DATE = date) 
+#str(oil_data)
+glimpse(oil_data) 
+
+# consumer sentiment
+sent_data <- read_csv('data/UMCSENT.csv')  
+sent_data$DATE <- as.Date(sent_data$DATE, format = "%Y-%m-%d")
+
+# inflaltion
+inflation_data <- read_csv('data/MICH.csv') 
+inflation_data$DATE <- as.Date(inflation_data$DATE, format = "%Y-%m-%d")
+
+# merged_data <- left_join(sent_data, inflation_data, by = 'DATE')
+# glimpse(merged_data)
+
+merged_data <- sp500_data |>
+  left_join(inflation_data, by = 'DATE') |>
+  left_join(oil_data, by = 'DATE') |>
+  left_join(sent_data, by = 'DATE')
+glimpse(merged_data)
+
+merged_data <- merged_data |>
+  mutate(UMCSENT = na_if(UMCSENT, "."))
+merged_data <- merged_data |>
+  filter(!is.na(UMCSENT) | !is.na(oil_price) | !is.na(`S&P500`))
+glimpse(merged_data)
+
+data <- read_csv("data/merged_economic_indicators.csv")
+
+# Convert 'date' column to Date type
+data$date <- as.Date(data$date, format="%Y-%m-%d")
 ```
 
 ```{r}
+#| label: Creating Box plot
 
+plot_data <- merged_data |>
+  mutate(
+    HalfYear = ifelse(format(DATE, "%m") %in% c("01", "02", "03", "04", "05", "06"), 
+                      paste0(format(DATE, "%Y"), "-H1"), 
+                      paste0(format(DATE, "%Y"), "-H2")),  # Group by Half-Year
+    Quarter = format(DATE, "%Y-Q%q"),  # Quarterly grouping
+    UMCSENT = as.numeric(UMCSENT) 
+  ) |>
+  filter(!is.na(UMCSENT) & !is.na(`S&P500`)) |>
+  filter(format(DATE, "%Y") >= "2020")
 ```
 
 ```{r}
+  # completed
+# Calculate yearly means
+mean_data <- plot_data |>
+  group_by(Year = factor(format(DATE, "%Y"))) |>
+  summarize(mean_UMCSENT = mean(UMCSENT, na.rm = TRUE))
 
+# Rescale oil_prices to match the range of Consumer Sentiment (UMCSENT)
+scale_factor <- max(plot_data$UMCSENT, na.rm = TRUE) / max(plot_data$oil_price, na.rm = TRUE)
+
+# Boxplot with rescaled oil prices
+box <- ggplot(plot_data, aes(x = factor(format(DATE, "%Y")), y = UMCSENT)) +
+  geom_boxplot(fill = "thistle1", outlier.color = "red", outlier.size = 1.5) +
+  geom_point(aes(
+    y = oil_price * scale_factor, 
+    text = paste("Scaled Oil Price:", sprintf("%.2f", oil_price * scale_factor))  # Update tooltip label and format
+  ), color = "darkgreen", alpha = 0.6, size = 2, position = position_jitter(width = 0.2)) +
+  geom_smooth(aes(y = oil_price * scale_factor, group = 1, 
+                  text = paste("Smoothed Scaled Oil Price:", sprintf("%.2f", ..y..))), method = "loess", color = "darkgreen", linetype = "solid", size = 1, se = FALSE) +
+  labs(
+    title = "Consumer Sentiment and Oil Prices Trends Over Time",
+    x = "Year",
+    y = "Consumer Sentiment/Rescaled Oil Prices",
+    caption = "Oil Prices are rescaled to align with Consumer Sentiment for easier comparison"
+  ) +
+  theme_minimal(base_size = 10)
+
+# Convert to interactive plot
+int_box <- ggplotly(box, tooltip = c("text"))  # Only show the custom tooltip
+
+# Display the interactive plot
+int_box
+
+# Rescale oil prices to match the range of Consumer Sentiment (UMCSENT)
+scale_factor_oil <- max(plot_data$UMCSENT, na.rm = TRUE) / max(plot_data$oil_price, na.rm = TRUE)
+
+int_box_2 <- ggplot(plot_data, aes(x = factor(format(DATE, "%Y")), y = UMCSENT)) +
+  geom_boxplot(fill = "lightblue", outlier.color = "deeppink3", outlier.size = 1.5) +
+  geom_smooth(aes(y = oil_price * scale_factor_oil, group = 1), method = "loess", color = "darkgreen", linetype = "dashed", size = 1, se = FALSE) +
+  labs(
+    title = "Consumer Sentiment and Oil Price Trends Over Time",
+    x = "Year",
+    y = "Consumer Sentiment (UMCSENT) / Rescaled Oil Prices",
+    caption = "Oil Prices are rescaled to align with Consumer Sentiment for easier comparison"
+  ) +
+  theme_minimal(base_size = 9) +
+  theme(
+    panel.border = element_rect(color = "black", fill = NA, size = 0.8),
+    axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+int_box_2 <- ggplotly()
+int_box_2
+```
+
+##### Brief interpretation
+
+1.  The trends suggest a strong inverse relationship between inflation and consumer sentiment during the conflict. As inflation surged, consumer confidence declined, highlighting the impact of rising costs on public perception.
+
+2.  Consumer sentiment was already in a decline trend probably due to COVID caused by economic uncertainty and inflation pressures. Consumer sentiment drops more sharply during the conflict, reaching its lowest levels. This suggests that the war might have intensified concerns about economic stability, inflation, and geopolitical risks.
+
+3.  Before the conflict there was gradual increase in inflation likely due to COVID-19 but we can see a sharp increase in it when the war started at full scale which is probably due to global supply chain disruptions
+
+#### Stocks and Inflation Trends During Russia Ukraine Conflict
+
+```{r}
+#| label: Stocks and Inflation Trends During Russia Ukraine Conflict
+options(warn = FALSE)
+
+# Adding a range to mark the Russia-Ukraine war period
+war_start <- as.Date("2022-02-01")
+war_end <- as.Date("2023-12-31")
+
+#Re-scaling the inflation index so that we have only 1 y-axis and its easier to compare
+scale_factor <- max(plot_data$UMCSENT, na.rm = TRUE) / max(plot_data$MICH, na.rm = TRUE)
+
+# Creating an animated line plot using ggplot and gganimate
+animated_plot <- ggplot(plot_data, aes(x = DATE)) +
+  geom_line(aes(y = UMCSENT, color = "Consumer Sentiment"), size = 1.2) +
+  geom_line(aes(y = MICH * scale_factor, color = "Inflation"), size = 1.2) +
+  annotate("rect", xmin = war_start, xmax = war_end, ymin = -Inf, ymax = Inf, fill = "gray80", alpha = 0.5) +
+  # annotate("segment", x = as.Date("2023-02-24"), xend = as.Date("2023-02-24"), 
+  #        y = 0, yend = 120, color = "black", linetype = "dashed", size = 1) +
+  annotate("text", x = as.Date("2023-02-24"), y = 85, label = "Conflict Period", 
+         color = "black", angle = 90, vjust = -0.5, hjust = 1, font = "bold") +
+  scale_y_continuous(limits = c(0, 120),breaks = seq(0, 120, by = 20)) +
+  scale_x_date(limits = c(as.Date("2015-01-01"), max(plot_data$DATE, na.rm = FALSE)),
+               date_labels = "%Y",
+               date_breaks = "1 year") +
+  scale_color_manual(values = c("Consumer Sentiment" = "cyan1", "Inflation" = "mediumvioletred")) +
+  labs(title = "Consumer Sentiment and Inflation Trends During Russia-Ukraine War",
+       # subtitle = "Inflation index re-scaled to align with Consumer Sentiment for better comparison",
+       x = "Date",
+       y = "Consumer Sentiment & Inflation Index",
+       color = "Economic Variables") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "bottom",
+        plot.title = element_text(face = "bold", size = 13),
+        plot.subtitle = element_text(size = 12, color = "gray50"),
+        # panel.border = element_rect(color = "black", fill = NA, size = 0.8),
+        # panel.grid.major = element_line(color = "gray80"),
+        panel.grid.minor = element_blank(),
+        plot.background = element_rect(fill = "white", color = NA)) +
+  transition_reveal(DATE)  # Animate the plot over the 'DATE' variable
+
+# Animate the plot
+# animated_plot <- animate(animated_plot, nframes = 100, width = 800, height = 600)
+animated_plot
+# Save the animation
+anim_save("images/inflation_vs_sentiment.gif", animated_plot)
 ```
 
 ```{r}
+options(warn = FALSE)
+# Define the conflict period
+war_start <- as.Date("2022-02-01")  # Start of the conflict
+war_end <- as.Date("2022-03-31")    # End of the conflict
 
-```
+# Scale factor for S&P500
+scale_factor_500 <- max(plot_data$UMCSENT, na.rm = TRUE) / max(plot_data$`S&P500`, na.rm = TRUE)
 
-```{r}
 
-```
+# Create the animated plot
+animated_plot <- ggplot(plot_data, aes(x = DATE)) +
+  # Shaded region (war period)
+  annotate("rect", xmin = war_start, xmax = war_end, ymin = -Inf, ymax = Inf, 
+           fill = "gray80", alpha = 0.5) +
+  
+  # Static line for S&P500 (rescaled)
+  geom_line(aes(y = `S&P500` * scale_factor_500, color = "Stock Market (S&P500)"), size = 1.2) +
+  
+  # Static line for Inflation (rescaled)
+  geom_line(aes(y = MICH * scale_factor, color = "Inflation"), size = 1.2) +
+  
+  # Moving point for S&P500 along the line
+  geom_point(aes(y = `S&P500` * scale_factor_500, color = "Stock Market (S&P500)"), size = 3) +
+  
+  # Moving point for Inflation along the line
+  geom_point(aes(y = MICH * scale_factor, color = "Inflation"), size = 3) +
+  
+  # Annotation for the conflict period
+  annotate("text", 
+           x = as.Date("2022-03-10"), 
+           y = 55, 
+           label = "Period of Conflict", 
+           color = "black", angle = 90, vjust = -0.5, hjust = 1, fontface = "italic") +
+  
+  # Adjust y-axis scale and breaks
+  scale_y_continuous(limits = c(0, 150), breaks = seq(0, 150, by = 20)) +
+  
+  # Adjust x-axis scale
+  scale_x_date(limits = c(as.Date("2021-01-01"), as.Date("2023-12-31")),
+               date_labels = "%b %Y",  
+               date_breaks = "5 months") +
+  
+  # Define custom colors for the lines and points
+  scale_color_manual(values = c("Stock Market (S&P500)" = "cyan1", "Inflation" = "mediumvioletred")) +
+  
+  # Add titles and labels
+  labs(
+    title = "Stock Market (S&P500) and Inflation Trends During Russia-Ukraine War",
+    subtitle = 'Date: {frame_along}',  # Dynamic subtitle for date
+    x = "Date",
+    y = "S&P500 & Inflation Index (Rescaled)",
+    color = "Economic Variables"
+  ) +
+  
+  # Apply theme for styling
+  theme_minimal() +
+  theme(
+    panel.grid.minor = element_blank(),
+    legend.title = element_text(size = 8),
+    plot.title = element_text(size = 8),
+    axis.title.x = element_text(size = 8),  
+    axis.title.y = element_text(size = 6),  
+    axis.text.x = element_text(size = 8),   
+    axis.text.y = element_text(size = 8), 
+    legend.position = "bottom",
+    legend.text = element_text(size = 8)
+  ) +
+  
+  # Transition to move the points along the lines
+  transition_reveal(DATE)
 
-```{r}
+# Save and render the animation
+# animate(animated_plot, nframes = 100, fps = 10, width = 800, height = 600, 
+        #renderer = av_renderer("videos/moving_points_along_lines.gif"))
 
+# Render and save the animation as a GIF
+animate(animated_plot, renderer = gifski_renderer("images/stocks_vs_inflation.gif"), height = 600, width = 800, units = "px", duration = 10, fps = 20)
 ```

@@ -54,6 +54,8 @@ mtcars$speed <- mtcars$hp / mtcars$wt
 data("penguins")
 ```
 
+{style="text-align: center;"} <video controls width="800"> <source src="videos/sample-video.mp4" type="video/mp4"> Your browser does not support the video tag. </video>
+
 # Using Quarto for presentations
 
 ## Quarto
@@ -165,3 +167,15 @@ Limitations:
 -   You are welcomed to use the default styling of the slides. In fact, that's what I expect majority of you will do. You will differentiate yourself with the content of your presentation.
 
 -   But some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs.
+
+## Video
+
+<div>
+
+<video controls width="800">
+
+<source src="animated_time_series_q1.mp4" type="video/mp4">
+
+</video>
+
+</div>
