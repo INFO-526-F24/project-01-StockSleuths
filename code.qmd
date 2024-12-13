@@ -49,7 +49,8 @@ pacman::p_load(tidyverse,
                skimr,
                janitor,
                readxl,
-               scales)
+               scales, 
+               gganimate)
 
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
@@ -471,5 +472,24 @@ ggplot(data = merged_data, aes(x = oil_price, y = `S&P500`)) +
 ```
 
 ```{r}
-colnames(merged_data)
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
 ```
