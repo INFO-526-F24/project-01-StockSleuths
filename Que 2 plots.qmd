@@ -138,6 +138,28 @@ int_box <- ggplotly(box, tooltip = c("text"))  # Only show the custom tooltip
 int_box
 
 
+<<<<<<< HEAD
+=======
+# Rescale oil prices to match the range of Consumer Sentiment (UMCSENT)
+scale_factor_oil <- max(plot_data$UMCSENT, na.rm = TRUE) / max(plot_data$oil_price, na.rm = TRUE)
+
+int_box_2 <- ggplot(plot_data, aes(x = factor(format(DATE, "%Y")), y = UMCSENT)) +
+  geom_boxplot(fill = "lightblue", outlier.color = "deeppink3", outlier.size = 1.5) +
+  geom_smooth(aes(y = oil_price * scale_factor_oil, group = 1), method = "loess", color = "darkgreen", linetype = "dashed", size = 1, se = FALSE) +
+  labs(
+    title = "Consumer Sentiment and Oil Price Trends Over Time",
+    x = "Year",
+    y = "Consumer Sentiment (UMCSENT) / Rescaled Oil Prices",
+    caption = "Oil Prices are rescaled to align with Consumer Sentiment for easier comparison"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.border = element_rect(color = "black", fill = NA, size = 0.8),
+    axis.text.x = element_text(angle = 45, hjust = 1))
+>>>>>>> 420ec992a57d8e6b8cba25d3597db51c2940c959
+
+int_box_2 <- ggplotly()
+int_box_2
 
 
 ```
