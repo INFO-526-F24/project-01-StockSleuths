@@ -15,7 +15,7 @@ website:
       - text: Code
         href: code.qmd
       - text: Presentation
-        href: presentation.qmd
+        href: https://docs.google.com/presentation/d/1lm-3nYoeYGpGQEJbRSyEtHeTigeLotv2_i3r8ClHmag/edit?usp=sharing
       - text: Contract
         href: contract.qmd
       - text: About
