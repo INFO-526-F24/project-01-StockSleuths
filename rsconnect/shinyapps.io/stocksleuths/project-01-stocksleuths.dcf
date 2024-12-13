@@ -1,0 +1,10 @@
+name: project-01-stocksleuths
+title:
+username: stocksleuths
+account: stocksleuths
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 13592529
+bundleId: 9516145
+url: https://stocksleuths.shinyapps.io/project-01-stocksleuths/
+version: 1

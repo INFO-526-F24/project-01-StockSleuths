@@ -311,7 +311,7 @@ sp500_2022 <- subset(sp500_index, format(date, "%Y") == "2022")
 
 merged_data <- merge(oil_2022, sp500_2022, by = "date")
 
-ggplot(data = merged_data, aes(x = oil_price, y = `S&P500`)) +
+plot_1 <- ggplot(data = merged_data, aes(x = oil_price, y = `S&P500`)) +
   geom_point(color = "black", size = 3) +
   geom_smooth(method = "lm", color = "red", se = FALSE) +
   labs(
@@ -322,6 +322,15 @@ ggplot(data = merged_data, aes(x = oil_price, y = `S&P500`)) +
   scale_x_continuous(labels = dollar) +
   scale_y_continuous(labels = dollar) +
   theme_minimal()
+# Saving the plot
+# Saving the plot in high resolution
+ggsave(
+  filename = here("images", "oil_vs_stocks_scatterplot.png"),
+  plot = plot_1,
+  width = 10,          # Adjust width as per your need
+  height = 8,          # Adjust height as per your need
+  dpi = 300            # Set DPI to 300 for high-quality output
+)
 ```
 
 ##### Observations:
@@ -508,6 +517,9 @@ int_box <- ggplotly(box, tooltip = c("text"))  # Only show the custom tooltip
 # Display the interactive plot
 int_box
 
+
+
+
 # Rescale oil prices to match the range of Consumer Sentiment (UMCSENT)
 scale_factor_oil <- max(plot_data$UMCSENT, na.rm = TRUE) / max(plot_data$oil_price, na.rm = TRUE)
 
@@ -528,6 +540,8 @@ int_box_2 <- ggplot(plot_data, aes(x = factor(format(DATE, "%Y")), y = UMCSENT))
 
 int_box_2 <- ggplotly()
 int_box_2
+#ggsave(here("images", "sentiment_vs_oil_boxplot_0.png"), plot = int_box)
+#ggsave(here("images", "sentiment_vs_oil_boxplot.png"), plot = int_box_2)
 ```
 
 ##### Brief interpretation

@@ -20,9 +20,13 @@ website:
         href: contract.qmd
       - text: About
         href: about.qmd
+      - text: Dashboard
+        href: https://stocksleuths.shinyapps.io/stocksleuths/
 
 format:
   html:
+    embed-resources: true
+    keep-shiny: true
     theme:
       light: flatly
       dark: darkly
