@@ -23,7 +23,6 @@ The Russia-Ukraine conflict has caused a lot of disruption globally, and its eff
 Folders
 
 - `data`: Includes cleaned datasets used for analysis.
-- `writeup.pdf`: Important project notes and references.
 - `images`: All the cool graphs and visualizations we made.
 - `code.qmd`: Scripts for cleaning, analyzing, and visualizing data.
 
