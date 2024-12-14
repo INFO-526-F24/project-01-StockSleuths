@@ -34,6 +34,7 @@ The datasets include:
 ## Setup
 
 ```{r}
+#| label: Setup
 if (!require("pacman")) 
   install.packages("pacman")
 
@@ -297,6 +298,7 @@ datatable(oil_stats)
 #### Oil Prices vs S&P 500 Stock Analysis:
 
 ```{r}
+#| label: Oil Prices vs S&P 500 Stock Analysis
 oil <- read_csv(here("data","cleaned_oil_data.csv"))
 oil$date <- as.Date(oil$date, format = "%Y-%m-%d")
 
@@ -340,6 +342,7 @@ The scatter plot shows the relationship between oil prices and S&P 500 prices fo
 #### Oil Prices and S&P500 Trends from 2021 to 2023.
 
 ```{r}
+#| label: Oil Prices and S&P500 Trends from 2021 to 2023.
 oil <- read_csv("data/cleaned_oil_data.csv")
 sp500 <- read_csv("data/sp500_index.csv")
 
@@ -425,7 +428,7 @@ animate(animated_plot, renderer = gifski_renderer("images/stocks_vs_oil.gif"), h
 #### Consumer Sentiment and Oil price trends over time
 
 ```{r}
-#| label: Cleaning and merging the data together
+#| label: Consumer Sentiment and Oil price trends over time
 
 #Stock market
 sp500_data <- read_csv('data/sp500_index.csv') 

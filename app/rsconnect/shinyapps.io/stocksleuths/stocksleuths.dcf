@@ -5,7 +5,7 @@ account: stocksleuths
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 13592610
-bundleId: 9516184
+bundleId: 9518863
 url: https://stocksleuths.shinyapps.io/stocksleuths/
 version: 1
 asMultiple: FALSE
